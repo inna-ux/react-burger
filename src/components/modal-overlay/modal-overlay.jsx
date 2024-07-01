@@ -1,5 +1,5 @@
 import { func } from "prop-types";
-import style from "./madal-overlay.module.css";
+import style from "./modal-overlay.module.css";
 
 function ModalOverlay  ({ onClick }) {
   <div onClick={onClick} className={style.modal__overlay}></div>
