@@ -1,0 +1,39 @@
+.section {
+    width: 50%;
+    height: 65vh;
+    margin-bottom: 52px;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+  
+  .list {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 16px;
+  }
+  
+   
+  .container__item__filling {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-color: #2F2F37 #8585AD;
+    scrollbar-width: thin;
+    max-height: 400px;
+  }
+  
+  .overallCost__container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .overallCost {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  
