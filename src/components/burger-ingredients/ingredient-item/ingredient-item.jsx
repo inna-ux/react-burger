@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Counter,
     CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import itemStyles from "./ingredient-item.module.css";
+
 import { number, string } from "prop-types";
 
 function BurgerIngredientItem({ ingredientData }) {
+
+    const [count, setCount] = useState(0);
+    const handler = () => {
+        let currentCount = count;
+        currentCount++;
+        setCount(currentCount);
+
+    }
     return (
         <>
-            <div className={`${itemStyles.card__item} pb-8`}>
-                <Counter size="default" />
+            <div onClick={handler} className={`${itemStyles.card__item} pb-8`}>
+                <Counter count={count} size="default" />
                 <img src={ingredientData.image} alt="ingredient" />
-                
+
                 <div className={`${itemStyles.price} pt-1 pb-1 `}>
                     <h3 className='text text_type_digits-default'>{ingredientData.price}</h3>
                     <CurrencyIcon type="primary" />
@@ -29,4 +38,5 @@ BurgerIngredientItem.propTypes = {
     price: number,
     name: string,
 };
-export default BurgerIngredientItem;    
+
+export default BurgerIngredientItem; 
