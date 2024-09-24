@@ -1,20 +1,41 @@
+import React from "react";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from './modal.module.css';
-import { func, node } from "prop-types";
-import { Portal } from '../portal/portal';
-import ModalOverlay  from '../modal-overlay/modal-overlay';
+import { bool, func, node } from "prop-types";
 import { useEffect } from "react";
+import { ModalOverlay } from '../modal-overlay/modal-overlay';
+import { useMemo } from "react";
+import { createPortal } from "react-dom";
 
-export const Modal = ({ onClose, children }) => {
-    useEffect(() => {
-      window.addEventListener("keyup", (event) => {
-        if (event.key !== "Escape") return;
-        onClose();
-      });
-    }, [onClose]);
-  
-    return (
-      <Portal>
+const modalRootElement = document.querySelector("#modal");
+
+export const Modal = ({ onClose, children, marker, open }) => {
+
+  const element = useMemo(() => {
+    const element = document.createElement('div');
+    element.dataset.marker = marker;
+    return element;
+  }, [marker]);
+
+  useEffect(() => {
+    if (open) {
+      modalRootElement.appendChild(element);
+      return () => {
+        modalRootElement.removeChild(element);
+      };
+    }
+  });
+
+  useEffect(() => {
+    window.addEventListener("keyup", (event) => {
+      if (event.key !== "Escape") return;
+      onClose();
+    });
+  }, [onClose]);
+
+  if (open) {
+    return createPortal(
+      <div>
         <ModalOverlay onClick={onClose} />
         <section className={style.modal}>
           <div className={style.close__icon}>
@@ -22,11 +43,15 @@ export const Modal = ({ onClose, children }) => {
           </div>
           {children}
         </section>
-      </Portal>
+      </div>,
+      element
     );
-  };
-  
-  Modal.propTypes = {
-    children: node,
-    onClose: func,
-  };
+  }
+  return null;
+};
+
+Modal.propTypes = {
+  open: bool,
+  children: node,
+  onClose: func,
+};
