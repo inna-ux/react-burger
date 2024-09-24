@@ -1,10 +1,10 @@
 * {
     box-sizing: border-box;
-  }
+}
 
-  html {
+html {
     overflow: hidden;
-  }
+}
 
 body {
     display: flex;
@@ -15,7 +15,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #131316;
-    }
+}
 
 h1,
 h2,
