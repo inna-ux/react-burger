@@ -1,27 +1,10 @@
-import { Modal } from '../modal/modal';
-import style from './ingredient-details.module.css';
-import { array, bool, func, number, string, node } from "prop-types";
+import style from "./ingredient-details.module.css";
+import { ingredientPropTypes } from "../../utils/prop-types";
 
-function IngredientsDetails({
-  onClose,
-  children,
-  open,
-  data,
-  currentIndex
-}) {
-
-  const ingredient = data[currentIndex];
-
+function IngredientsDetails({ ingredient }) {
   return (
-    <Modal marker="modal_1" children={children} open={open} onClose={onClose}>
-      <div className={`${style.title__container} mt-10 ml-10 mr-10`}>
-        <p className="text text_type_main-large">Детали ингредиента</p>
-      </div>
-      <img
-        src={ingredient.image}
-        alt="ingredient"
-        style={{ width: "520px", height: "240px", objectFit: "contain" }}
-      />
+    <>
+      <img src={ingredient.image} alt="the ingredient" className={style.img} />
       <p className="text text_type_main-medium mt-4 mb-8">{ingredient.name}</p>
       <div className={`${style.ingredients__container} pb-15`}>
         <div className={style.ingredients__info}>
@@ -57,22 +40,11 @@ function IngredientsDetails({
           </p>
         </div>
       </div>
-    </Modal>
-  )
-
-};
+    </>
+  );
+}
 IngredientsDetails.propTypes = {
-  open: bool,
-  children: node,
-  onClose: func,
-  data: array,
-  currentIndex: number,
-  image: string,
-  name: string,
-  calories: number,
-  proteins: number,
-  fat: number,
-  carbohydrates: number,
+  ingredient: ingredientPropTypes.isRequired,
 };
 
 export default IngredientsDetails;
