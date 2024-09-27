@@ -1,0 +1,12 @@
+.app {
+  width: 100%;
+  max-width: 1920px;
+}
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1240px;
+  margin: 0 auto;
+  min-height: 50px;
+}

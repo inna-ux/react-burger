@@ -1,0 +1,24 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 40px;
+  text-align: center;
+  background-color: #1c1c21;
+  z-index: 456657768;
+}
+
+.close__icon {
+  position: absolute;
+  right: 40px;
+  top: 60px;
+  cursor: pointer;
+}
+.title__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 640px;
+  height: 64px;
+}

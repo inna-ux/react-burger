@@ -1,0 +1,43 @@
+.section {
+  width: 50%;
+}
+
+.list_main {
+  display: flex;
+  flex-direction: column;
+  height: 65vh;
+  justify-content: space-between;
+}
+
+.container__item__filling {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 40vh;
+  scrollbar-color: #2f2f37 #8585ad;
+  scrollbar-width: thin;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.card__list_item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.full_price_container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.full_price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
