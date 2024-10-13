@@ -2,28 +2,48 @@ import React from "react";
 import IngredientsStyles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsGroup from "./ingredients-group/ingredients-group";
-import { useState, useMemo } from "react";
-import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 import IngredientsDetails from "../ingredient-details/ingredient-details";
 import { Modal } from "../modal/modal";
-import { ingredientPropTypes } from "../../utils/prop-types";
 
-function BurgerIngredients(props) {
-  const [current, setCurrent] = useState("bun");
-  const [currentIngredient, setCurrentIngredient] = useState(null);
+import { closeIngredientInfo } from "../../services/actions/ingredient-details-info";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBuns, getAllSauce, getAllMain } from "../../services/selectors";
 
-  const buns = useMemo(
-    () => props.data.filter((item) => item.type === "bun"),
-    [props.data]
-  );
-  const mains = useMemo(
-    () => props.data.filter((item) => item.type === "main"),
-    [props.data]
-  );
-  const sauces = useMemo(
-    () => props.data.filter((item) => item.type === "sauce"),
-    [props.data]
-  );
+function BurgerIngredients() {
+  const [current, setCurrent] = useState("buns");
+
+  const [modalActive, setModalActive] = useState(false);
+  const dispatch = useDispatch();
+  const onClose = () => {
+    setModalActive(false);
+    dispatch(closeIngredientInfo());
+  };
+
+  const buns = useSelector(getAllBuns);
+  const mains = useSelector(getAllMain);
+  const sauces = useSelector(getAllSauce);
+
+  function handleButtonClick(tab) {
+    setCurrent(tab);
+    const element = document.getElementById(tab);
+    if (element) element.scrollIntoView({ behavior: "smooth" });
+  }
+
+  const [bunsRef, bunsInView] = useInView({ threshold: 0 });
+  const [sausesRef, sausesInView] = useInView({ threshold: 0 });
+  const [mainRef, mainInView] = useInView({ threshold: 0 });
+
+  useEffect(() => {
+    if (bunsInView) {
+      setCurrent("buns");
+    } else if (sausesInView) {
+      setCurrent("sauces");
+    } else if (mainInView) {
+      setCurrent("main");
+    }
+  }, [bunsInView, sausesInView, mainInView]);
 
   return (
     <section className={`${IngredientsStyles.section}`}>
@@ -33,52 +53,60 @@ function BurgerIngredients(props) {
         Соберите бургер
       </h1>
       <div className={`${IngredientsStyles.Tabs} mb-10`}>
-        <Tab value="bun" active={current === "bun"} onClick={setCurrent}>
+        <Tab
+          value="buns"
+          active={current === "buns"}
+          onClick={() => handleButtonClick("buns")}
+        >
           Булки
         </Tab>
-        <Tab value="sauce" active={current === "sauce"} onClick={setCurrent}>
+        <Tab
+          value="sauces"
+          active={current === "sauces"}
+          onClick={() => handleButtonClick("sauces")}
+        >
           Соусы
         </Tab>
         <Tab
-          value="filling"
-          active={current === "filling"}
-          onClick={setCurrent}
+          value="main"
+          active={current === "main"}
+          onClick={() => handleButtonClick("main")}
         >
           Начинки
         </Tab>
       </div>
+
       <div className={IngredientsStyles.ingredients__block}>
         <BurgerIngredientsGroup
+          innerRef={bunsRef}
+          titleId={"buns"}
           data={buns}
           title="Булки"
-          onClick={setCurrentIngredient}
+          onClick={setModalActive}
         />
         <BurgerIngredientsGroup
-          data={mains}
-          title="Соусы"
-          onClick={setCurrentIngredient}
-        />
-        <BurgerIngredientsGroup
+          innerRef={sausesRef}
+          titleId={"sauces"}
           data={sauces}
+          title="Соусы"
+          onClick={setModalActive}
+        />
+        <BurgerIngredientsGroup
+          innerRef={mainRef}
+          titleId={"main"}
+          data={mains}
           title="Начинки"
-          onClick={setCurrentIngredient}
+          onClick={setModalActive}
         />
       </div>
 
-      {currentIngredient && (
-        <Modal
-          title={"Детали ингредиента"}
-          onClose={() => setCurrentIngredient(null)}
-        >
-          <IngredientsDetails ingredient={currentIngredient} />
+      {modalActive && (
+        <Modal title={"Детали ингредиента"} onClose={onClose}>
+          <IngredientsDetails />
         </Modal>
       )}
     </section>
   );
 }
-
-BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
-};
 
 export default BurgerIngredients;
