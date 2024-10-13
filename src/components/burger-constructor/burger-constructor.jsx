@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
@@ -18,10 +18,9 @@ import {
 } from "../../services/actions/ingredients-constructor";
 import { Modal } from "../modal/modal";
 import { useDrop } from "react-dnd";
-import { v4 as uuidv4 } from "uuid";
 import {
   addBunsInConstructor,
-  addIngredientInConstructor,
+  ADD_INGREDIENT,
 } from "../../services/actions/ingredients-constructor";
 import { ContentBurger } from "./content-burger";
 
@@ -43,7 +42,7 @@ function BurgerConstructor() {
       if (item.type === "bun") {
         dispatch(addBunsInConstructor([item, item]));
       } else {
-        dispatch(addIngredientInConstructor({ ...item, id: uuidv4() }));
+        dispatch({ type: ADD_INGREDIENT, item });
       }
     },
     collect: (monitor) => ({
@@ -70,7 +69,6 @@ function BurgerConstructor() {
     return total;
   }, [saucesMains, buns]);
 
-
   const onClose = () => {
     setOpen(false);
     dispatch({ type: RESET_INGREDIENTS });
@@ -84,9 +82,18 @@ function BurgerConstructor() {
     setOpen(true);
   };
 
+  const [active, setActive] = useState(true);
+
+  useEffect(() => {
+    if (buns.length === 0 || saucesMains.length === 0) {
+      setActive(true);
+    } else if (buns.length > 0 && saucesMains.length > 0) {
+      setActive(false);
+    }
+  }, [buns, saucesMains]);
+
   return (
     <section ref={dropTarget} className={`${style.section} pt-25 pl-10 pb-10 `}>
-    
       <ul className={`${style.list_main}  pl-4 pr-4  `}>
         <li className={`${style.item__top} ml-8 pr-4 mb-4`}>
           {buns.length === 0 ? (
@@ -122,12 +129,13 @@ function BurgerConstructor() {
           ) : (
             <ul className={style.list}>
               {saucesMains.map((item, index) => (
-                <li key={index.toString()} className={style.card__list_item}>
+                <li className={style.card__list_item}>
                   <DragIcon type="primary" />
                   <ContentBurger
                     item={item}
                     index={index}
                     moveList={moveList}
+                    key={item.id}
                   />
                 </li>
               ))}
@@ -164,7 +172,13 @@ function BurgerConstructor() {
             type="primary"
           />
         </div>
-        <Button htmlType="button" type="primary" size="large" onClick={onClick}>
+        <Button
+          disabled={active}
+          htmlType="button"
+          type="primary"
+          size="large"
+          onClick={onClick}
+        >
           Оформить заказ
         </Button>
 
