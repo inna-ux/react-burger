@@ -20,7 +20,7 @@ import { Modal } from "../modal/modal";
 import { useDrop } from "react-dnd";
 import {
   addBunsInConstructor,
-  ADD_INGREDIENT,
+  addIngridient,
 } from "../../services/actions/ingredients-constructor";
 import { ContentBurger } from "./content-burger";
 
@@ -42,7 +42,7 @@ function BurgerConstructor() {
       if (item.type === "bun") {
         dispatch(addBunsInConstructor([item, item]));
       } else {
-        dispatch({ type: ADD_INGREDIENT, item });
+        dispatch( addIngridient(item));
       }
     },
     collect: (monitor) => ({
@@ -129,13 +129,13 @@ function BurgerConstructor() {
           ) : (
             <ul className={style.list}>
               {saucesMains.map((item, index) => (
-                <li className={style.card__list_item}>
+                <li key={item.id} className={style.card__list_item}>
                   <DragIcon type="primary" />
                   <ContentBurger
                     item={item}
                     index={index}
                     moveList={moveList}
-                    key={item.id}
+                    
                   />
                 </li>
               ))}

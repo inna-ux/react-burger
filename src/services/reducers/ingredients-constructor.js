@@ -5,7 +5,7 @@ import {
   RESET_INGREDIENTS,
   ADD_BUNS,
 } from "../actions/ingredients-constructor.js";
-import { v4 as uuidv4 } from 'uuid';
+
 
 //список всех ингредиентов в текущем конструкторе бургера
 const initialState = {
@@ -19,10 +19,11 @@ export const listIngredientsConstructor = (state = initialState, action) => {
     case ADD_BUNS:
       return { ...state, buns: action.payload };
     case ADD_INGREDIENT:
-      const idIngredient = { ...action.item, id: uuidv4() }
-      return {
-        ...state, otherIngredients: [idIngredient, ...state.otherIngredients]
-      }
+     
+    return {
+      ...state,
+      otherIngredients: [...state.otherIngredients, action.payload],
+    };
     case DELETE_INGREDIENT:
       return {
         ...state,
