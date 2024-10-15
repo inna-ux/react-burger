@@ -1,36 +1,22 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import AppHeader from "../app-header/app-header.jsx";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients.jsx";
 import BurgerConstructor from "../burger-constructor/burger-constructor.jsx";
 import appStyles from "./app.module.css";
-import { useState, useEffect } from "react";
-
-const Ingredient = "https://norma.nomoreparties.space/api/ingredients";
+import { getIngredientsData } from "../../services/actions/ingredients-data.js";
 
 function App() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
+  const dispatch = useDispatch();
+  const { loading, error, data } = useSelector(
+    (store) => store.listIngredients
+  );
   useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        const response = await fetch(Ingredient);
-        if (response.ok) {
-          const data = await response.json();
-          setData(data.data);
-        } else {
-          console.log("Erroe HTTP: " + response.status);
-        }
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(getIngredientsData());
+  }, [dispatch]);
 
   return (
     <div className={appStyles.app}>
@@ -38,19 +24,19 @@ function App() {
 
       {!loading && !error && data.length > 0 && (
         <main className={appStyles.main}>
-          <BurgerIngredients data={data} />
-          <BurgerConstructor data={data} />
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
         </main>
       )}
-
-      {loading && "Загрузка..."}
-
       {error && (
         <div>
           <h2>Сообщение об ошибке:</h2>
-          <p>{error.message}</p>
+          <p>{error}</p>
         </div>
       )}
+      {loading && "Загрузка..."}
     </div>
   );
 }
