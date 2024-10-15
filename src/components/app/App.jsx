@@ -1,19 +1,17 @@
 import React from "react";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { useDispatch } from "react-redux";
 import AppHeader from "../app-header/app-header.jsx";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients.jsx";
-import BurgerConstructor from "../burger-constructor/burger-constructor.jsx";
 import appStyles from "./app.module.css";
 import { getIngredientsData } from "../../services/actions/ingredients-data.js";
+import { Routes, Route, useLocation } from 'react-router-dom';
+import HomePage from "../../pages/home/home.jsx";
 
 function App() {
   const dispatch = useDispatch();
-  const { loading, error, data } = useSelector(
-    (store) => store.listIngredients
-  );
+  const location = useLocation();
+  const background = location.state && location.state.background;
+ 
   useEffect(() => {
     dispatch(getIngredientsData());
   }, [dispatch]);
@@ -21,22 +19,11 @@ function App() {
   return (
     <div className={appStyles.app}>
       <AppHeader />
+      <Routes location={background || location}>
+      <Route path="/" element={<HomePage />} />
+      </Routes>
 
-      {!loading && !error && data.length > 0 && (
-        <main className={appStyles.main}>
-          <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </DndProvider>
-        </main>
-      )}
-      {error && (
-        <div>
-          <h2>Сообщение об ошибке:</h2>
-          <p>{error}</p>
-        </div>
-      )}
-      {loading && "Загрузка..."}
+      
     </div>
   );
 }
