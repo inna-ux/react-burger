@@ -12,6 +12,7 @@ import Login from "../../pages/login/login.jsx";
 import ForgotPassword from "../../pages/forgot-password/forgot-password.jsx";
 import ResetPassword from "../../pages/reset-password/reset-password.jsx";
 import Register from "../../pages/register/register.jsx";
+import  {NotFound404}  from "../../pages/not-found/not-found.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/ingredients/:id" element={<IngredientsDetails />} />
+        <Route path="*" element={<NotFound404 />} />
       </Routes>
 
       {background && (
