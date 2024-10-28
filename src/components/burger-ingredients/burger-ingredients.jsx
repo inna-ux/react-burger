@@ -48,7 +48,7 @@ function BurgerIngredients() {
   return (
     <section className={`${IngredientsStyles.section}`}>
       <h1
-        className={`${IngredientsStyles.title}text text_type_main-large mt-10 mb-5`}
+        className={`${IngredientsStyles.title} text text_type_main-large mt-10 mb-5`}
       >
         Соберите бургер
       </h1>
