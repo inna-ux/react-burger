@@ -58,13 +58,13 @@ function BurgerIngredientItem({ ingredientData}) {
         <img src={ingredientData.image} alt="the ingredient" />
 
         <div className={`${itemStyles.price} pt-1 pb-1 `}>
-          <h3 className="text text_type_digits-default">
+          <h3 className="text text_type_digits-default ">
             {ingredientData.price}
           </h3>
           <CurrencyIcon type="primary" />
         </div>
 
-        <p className="text text_type_main-small">{ingredientData.name}</p>
+        <p className="text text_type_main-small ">{ingredientData.name}</p>
       </Link>
     )
   );

@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color: #F2F2F3;
 }
 .price {
   display: flex;
