@@ -66,19 +66,20 @@ export function user(email, password, name) {
 }
 
 //авторизация
-export function login(userInfo) {
+export function login(email, password) {
   return fetch(`${Ingredient}/auth/login`, {
     method: 'POST',
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(
       {
-        "email": `${userInfo.email}`,
-        "password": `${userInfo.password}`
+        "email": `${email}`,
+        "password": `${password}`
       }
     )
   })
     .then(res => checkResponse(res))
 }
+
 
 //получение данных пользователя
 export function getUser() {
@@ -86,24 +87,31 @@ export function getUser() {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + getCookie('accessToken')
+       'authorization': `${getCookie('token')}`
     },
   })
     .then(res => checkResponse(res))
 }
 
 //обновление данных пользователя через профиль
-export function updateUser(data) {
+export function updateUser(name, email, password) {
   return fetch(`${Ingredient}/auth/user`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + getCookie('accessToken')
+       'authorization': `${getCookie('token')}`
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(
+      {
+        "email": `${email}`,
+        "password": `${password}`,
+        "name": `${name}`
+      }
+    )
   })
     .then(res => checkResponse(res))
 }
+
 
 //обновление токена
 export function refreshToken() {
