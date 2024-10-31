@@ -5,12 +5,13 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./register.module.css";
 
 function Register() {
   const [value, setValue] = React.useState("value");
   const inputRef = React.useRef(null);
+  const navigate = useNavigate();
 
   const [Emailvalue, setEmailValue] = React.useState("bob@example.com");
   const onChange = (e) => {
@@ -21,6 +22,11 @@ function Register() {
   const onPasChange = (e) => {
     setPasValue(e.target.value);
   };
+
+  const loginClick = () => {
+    navigate("/login")
+
+  }
 
   return (
     <div className={styles.container}>
@@ -62,11 +68,11 @@ function Register() {
         <p className="text text_type_main-default text_color_inactive">
           Уже зарегистрированы?
         </p>
-        <Link to="/login">
-          <Button htmlType="button" type="secondary" size="small">
+        
+          <Button htmlType="button" onClick={loginClick} type="secondary" size="small">
             Войти
           </Button>
-        </Link>
+        
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./reset-password.module.css";
 
 function ResetPassword() {
@@ -12,6 +12,7 @@ function ResetPassword() {
   const [pasvalue, setPasValue] = React.useState("password");
 
   const inputRef = React.useRef(null);
+  const navigate = useNavigate();
 
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0);
@@ -21,6 +22,10 @@ function ResetPassword() {
   const onChangePas = (e) => {
     setPasValue(e.target.value);
   };
+  const loginClick = () => {
+    navigate("/login")
+
+  }
 
   return (
     <div className={styles.container}>
@@ -58,11 +63,9 @@ function ResetPassword() {
         <p className="text text_type_main-default text_color_inactive">
           Вспомнили пароль?
         </p>
-        <Link to="/login">
-          <Button htmlType="button" type="secondary" size="small">
+        <Button htmlType="button" onClick={loginClick} type="secondary" size="small">
             Войти
           </Button>
-        </Link>
       </div>
     </div>
   );
