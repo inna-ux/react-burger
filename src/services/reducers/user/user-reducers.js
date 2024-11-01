@@ -109,7 +109,6 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         isAuthorization: true,
         user: action.payload.user,
-        email: action.payload.email,
         getUserRequest: false,
         getUserFailed: false,
       };
