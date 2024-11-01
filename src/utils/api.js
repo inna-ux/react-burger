@@ -1,4 +1,4 @@
-import { getCookie } from "./cooke";
+import { getCookie, setCookie } from "./cooke";
 const Ingredient = "https://norma.nomoreparties.space/api";
 
 export function getIngredients() {
@@ -82,16 +82,34 @@ export function login(email, password) {
 
 
 //получение данных пользователя
-export function getUser() {
+
+export const getUser = () => {
   return fetch(`${Ingredient}/auth/user`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-       'authorization': `${getCookie('token')}`
+      'authorization': `${getCookie('accessToken')}`
     },
   })
-    .then(res => checkResponse(res))
-}
+    .then(checkResponse)
+    .catch((err) => {
+      if (err.message === 'jwt expired') {
+        refreshToken().then((res) => {
+          setCookie('accessToken', res.accessToken);
+          localStorage.setItem('refreshToken', res.refreshToken);
+          fetch(`${Ingredient}/auth/user`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+             'authorization': `${getCookie('accessToken')}`,
+            },
+          }).then(checkResponse);
+        });
+      } else {
+        return Promise.reject(err);
+      }
+    });
+};
 
 //обновление данных пользователя через профиль
 export function updateUser(name, email, password) {
@@ -99,7 +117,7 @@ export function updateUser(name, email, password) {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-       'authorization': `${getCookie('token')}`
+       'authorization': `${getCookie('accessToken')}`
     },
     body: JSON.stringify(
       {
@@ -114,15 +132,16 @@ export function updateUser(name, email, password) {
 
 
 //обновление токена
-export function refreshToken() {
+export const refreshToken = () => {
   return fetch(`${Ingredient}/auth/token`, {
     method: 'POST',
-    headers: { "Content-type": "application/json" },
-    body: JSON.stringify({ token: localStorage.getItem("refreshToken") })
-  })
-    .then((res) => checkResponse(res))
-}
-
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': localStorage.getItem('refreshToken') || '',
+    },
+    body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
+  }).then(res => checkResponse(res));
+};
 //логаут
 export function logoutUser() {
   return fetch(`${Ingredient}/auth/logout`, {
