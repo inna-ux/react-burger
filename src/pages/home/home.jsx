@@ -1,15 +1,17 @@
-
 import { useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients.jsx";
 import BurgerConstructor from "../../components/burger-constructor/burger-constructor.jsx";
 import styles from "./home.module.css";
+import { Preloader } from "../../components/preloader/preloader.jsx";
 
 function HomePage() {
   const { loading, error, data } = useSelector(
     (store) => store.listIngredients
   );
+
+  const { orderRequest } = useSelector((store) => store.createdOrder);
 
   return (
     <>
@@ -27,7 +29,8 @@ function HomePage() {
           <p>{error}</p>
         </div>
       )}
-      {loading && "Загрузка..."}
+      {loading && <Preloader />}
+      {orderRequest && <Preloader />}
     </>
   );
 }
