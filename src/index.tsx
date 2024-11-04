@@ -5,7 +5,7 @@ import App from "./components/app/App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./services/store";
 import { Provider } from "react-redux";
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from "react-router-dom";
 
 // Оборачиваем приложение компонентом Provider из пакета react-redux
 const root = ReactDOM.createRoot(
@@ -15,8 +15,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-    <BrowserRouter>
-      <App />
+      <BrowserRouter>
+        <App />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

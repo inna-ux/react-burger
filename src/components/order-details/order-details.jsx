@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import done from "../../images/done.svg";
+import graphics from "../../images/graphics.svg";
 
 import style from "./order-details.module.css";
 
@@ -15,7 +15,7 @@ function OrderDetails() {
       </p>
       <p className="text text_type_main-medium mb-15 ">идентификатор заказа</p>
       <img
-        src={done}
+        src={graphics}
         alt="Your order has started to be prepared. Wait for readiness at the orbital station."
         className={style.img}
       />

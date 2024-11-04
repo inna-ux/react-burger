@@ -6,9 +6,8 @@ import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 // import IngredientsDetails from "../ingredient-details/ingredient-details";
 // import { Modal } from "../modal/modal";
-
 // import { closeIngredientInfo } from "../../services/actions/ingredient-details-info";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { getAllBuns, getAllSauce, getAllMain } from "../../services/selectors";
 
 function BurgerIngredients() {

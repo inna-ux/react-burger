@@ -9,12 +9,10 @@ import { ingredientPropTypes } from "../../../utils/prop-types";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
-import { Link, useLocation } from 'react-router-dom';
-function BurgerIngredientItem({ ingredientData}) {
+import { Link, useLocation } from "react-router-dom";
+function BurgerIngredientItem({ ingredientData }) {
   const dispatch = useDispatch();
   const location = useLocation();
-  // const ingredientId = item['_id'];
-
 
   const constructorIngredients = useSelector(
     (store) => store.listIngredientsBurgerConstructor.otherIngredients
@@ -26,7 +24,7 @@ function BurgerIngredientItem({ ingredientData}) {
     ...constructorIngredients,
     ...constructorBuns,
   ];
-  
+
   const [{ isDrag }, dragRef] = useDrag({
     type: "ingredient",
     item: ingredientData,
@@ -42,13 +40,13 @@ function BurgerIngredientItem({ ingredientData}) {
   };
   const count = useSelector(() => getCounter(allIngredientsConstructor));
   const handler = () => {
-    // onClick(true);
     dispatch(openIngredientInfo(ingredientData));
   };
   return (
     !isDrag && (
-      <Link  
-      to={`/ingredients/${ingredientData._id}`} state={{ background: location }}
+      <Link
+        to={`/ingredients/${ingredientData._id}`}
+        state={{ background: location }}
         ref={dragRef}
         onClick={handler}
         className={`${itemStyles.card__item} pb-8`}
@@ -72,7 +70,6 @@ function BurgerIngredientItem({ ingredientData}) {
 
 BurgerIngredientItem.propTypes = {
   ingredientData: ingredientPropTypes.isRequired,
-  // onClick: PropTypes.func.isRequired,
 };
 
 export default BurgerIngredientItem;

@@ -10,7 +10,6 @@ function IngredientsDetails() {
     <>
       {!ingredient ? null : (
         <div className={style.block}>
-          
           <img
             src={ingredient.image}
             alt="the ingredient"
@@ -53,7 +52,6 @@ function IngredientsDetails() {
               </p>
             </div>
           </div>
-
         </div>
       )}
     </>
