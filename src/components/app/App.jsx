@@ -12,7 +12,10 @@ import Login from "../../pages/login/login.jsx";
 import ForgotPassword from "../../pages/forgot-password/forgot-password.jsx";
 import ResetPassword from "../../pages/reset-password/reset-password.jsx";
 import Register from "../../pages/register/register.jsx";
-import  {NotFound404}  from "../../pages/not-found/not-found.jsx";
+import { NotFound404 } from "../../pages/not-found/not-found.jsx";
+import { checkUserAuth } from "../../services/actions/user/set-user.js";
+import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route.jsx";
+import Profile from "../../pages/profile/profile.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +30,10 @@ function App() {
   const background = location.state && location.state.background;
 
   useEffect(() => {
+    dispatch(checkUserAuth());
+  }, []);
+
+  useEffect(() => {
     dispatch(getIngredientsData());
   }, [dispatch]);
 
@@ -35,10 +42,20 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
+        <Route
+          path="/register"
+          element={<OnlyUnAuth component={<Register />} />}
+        />
+        <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
+        <Route
+          path="/forgot-password"
+          element={<OnlyUnAuth component={<ForgotPassword />} />}
+        />
+        <Route
+          path="/reset-password"
+          element={<OnlyUnAuth component={<ResetPassword />} />}
+        />
         <Route path="/ingredients/:id" element={<IngredientsDetails />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
