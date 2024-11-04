@@ -3,7 +3,7 @@ import { ingredientsData } from "./ingredients-data.js";
 import { listIngredientsConstructor } from "./ingredients-constructor.js";
 import { ingredientDetailsInfo } from "./ingredient-details-info.js";
 import { orderNumber } from "./order-number.js";
-import { userReducer } from "./user/user-reducers.js"; 
+import { userReducer } from "./user/user-reducers.js";
 
 // Корневой редьюсер
 export const rootReducer = combineReducers({
@@ -11,7 +11,7 @@ export const rootReducer = combineReducers({
   listIngredientsBurgerConstructor: listIngredientsConstructor,
   currentIngredient: ingredientDetailsInfo,
   createdOrder: orderNumber,
-  userReducer
+  user: userReducer,
 });
 
 //как выглядит наше хранилище
@@ -33,5 +33,22 @@ export const rootReducer = combineReducers({
 //         orderNumber: 0,
 //         orderRequest: false,
 //         orderFailed: false
-//     }
+//     },
+//     user: {
+//         user: null,
+//         isAuthChecked: false,
+
+//         registerRequest: false,
+//         registerFailed: false,
+
+//         loginRequest: false,
+//       loginFailed: false,
+
+//        logoutUserRequest: false,
+//        logoutUserFailed: false,
+
+//       updateUserRequest: false,
+//       updateUserFailed: false,
+
+//      }
 //   }

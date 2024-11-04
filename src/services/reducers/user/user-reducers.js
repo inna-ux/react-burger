@@ -2,52 +2,28 @@ import {
   REGISTER_REQUEST,
   REGISTER_FAILED,
   REGISTER_SUCCESS,
-} from "../../actions/user/create-user";
+} from "../../actions/user/create-user.js";
+
 import {
-  GET_USER_FAILED,
-  GET_USER_SUCCESS,
-  GET_USER_REQUEST,
-} from "../../actions/user/get-user";
-import {
-  LOGIN_REQUEST,
+  SET_AUTH_CHECKED,
+  SET_USER,
   LOGIN_FAILED,
-  LOGIN_SUCCESS,
-} from "../../actions/user/login-user";
-import {
-  LOGOUT_REQUEST,
-  LOGOUT_SUCCESS,
+  LOGIN_REQUEST,
   LOGOUT_FAILED,
-} from "../../actions/user/logout-user";
-import {
-  REFRESH_TOKEN_FAILED,
-  REFRESH_TOKEN_SUCCESS,
-  REFRESH_TOKEN_REQUEST,
-} from "../../actions/user/refresh-token";
+  LOGOUT_REQUEST,
+} from "../../actions/user/set-user.js";
 import {
   UPDATE_USER_FAILED,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_REQUEST,
-} from "../../actions/user/update-user";
-import {
-  FORGOT_FAILED,
-  FORGOT_REQUEST,
-  FORGOT_SUCCESS,
-} from "../../actions/user/forgot-password";
-import {
-  RESET_FAILED,
-  RESET_REQUEST,
-  RESET_SUCCESS,
-} from "../../actions/reset-password";
+} from "../../actions/user/update-user.js";
 
 const initialState = {
-  user: { name: "", email: "" },
-  isAuthorization: false,
+  user: null,
+  isAuthChecked: false,
 
   registerRequest: false,
   registerFailed: false,
-
-  getUserRequest: false,
-  getUserFailed: false,
 
   loginRequest: false,
   loginFailed: false,
@@ -55,19 +31,8 @@ const initialState = {
   logoutUserRequest: false,
   logoutUserFailed: false,
 
-  refreshTokenRequest: false,
-  refreshTokenFailed: false,
-
   updateUserRequest: false,
   updateUserFailed: false,
-
-  forgotRequest: false,
-  forgotFailed: false,
-  forgotCodeSend: false,
-
-  resetRequest: false,
-  resetFailed: false,
-  resetSucces: false,
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -82,9 +47,10 @@ export const userReducer = (state = initialState, action) => {
     case REGISTER_SUCCESS: {
       return {
         ...state,
-        isAuthorization: true,
-        user: action.payload.user,
-        email: action.payload.email,
+        isAuthChecked: true,
+
+        user: action.payload,
+
         registerRequest: false,
         registerFailed: false,
       };
@@ -96,30 +62,16 @@ export const userReducer = (state = initialState, action) => {
         registerFailed: true,
       };
     }
-
-    case GET_USER_REQUEST: {
+    case SET_AUTH_CHECKED:
       return {
         ...state,
-        getUserRequest: true,
-        getUserFailed: false,
+        isAuthChecked: action.payload,
       };
-    }
-    case GET_USER_SUCCESS: {
+    case SET_USER:
       return {
         ...state,
-        isAuthorization: true,
-        user: action.payload.user,
-        getUserRequest: false,
-        getUserFailed: false,
+        user: action.payload,
       };
-    }
-    case GET_USER_FAILED: {
-      return {
-        ...state,
-        getUserRequest: false,
-        getUserFailed: true,
-      };
-    }
     case LOGIN_REQUEST: {
       return {
         ...state,
@@ -127,16 +79,7 @@ export const userReducer = (state = initialState, action) => {
         loginFailed: false,
       };
     }
-    case LOGIN_SUCCESS: {
-      return {
-        ...state,
-        isAuthorization: true,
-        user: action.payload.user,
-        email: action.payload.email,
-        loginRequest: false,
-        loginFailed: false,
-      };
-    }
+
     case LOGIN_FAILED: {
       return {
         ...state,
@@ -151,40 +94,12 @@ export const userReducer = (state = initialState, action) => {
         logoutUserFailed: false,
       };
     }
-    case LOGOUT_SUCCESS: {
-      return {
-        ...state,
-        isAuthorization: false,
-        logoutUserRequest: false,
-        logoutUserFailed: false,
-      };
-    }
+
     case LOGOUT_FAILED: {
       return {
         ...state,
         logoutUserRequest: false,
         logoutUserFailed: true,
-      };
-    }
-    case REFRESH_TOKEN_REQUEST: {
-      return {
-        ...state,
-        refreshTokenRequest: true,
-        refreshTokenFailed: false,
-      };
-    }
-    case REFRESH_TOKEN_SUCCESS: {
-      return {
-        ...state,
-        refreshTokenRequest: false,
-        refreshTokenFailed: false,
-      };
-    }
-    case REFRESH_TOKEN_FAILED: {
-      return {
-        ...state,
-        refreshTokenRequest: false,
-        refreshTokenFailed: true,
       };
     }
     case UPDATE_USER_REQUEST: {
@@ -197,8 +112,8 @@ export const userReducer = (state = initialState, action) => {
     case UPDATE_USER_SUCCESS: {
       return {
         ...state,
-        user: action.payload.user,
-        email: action.payload.email,
+
+        user: action.payload,
         updateUserRequest: false,
         updateUserFailed: false,
       };
@@ -208,56 +123,6 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         updateUserRequest: false,
         updateUserFailed: true,
-      };
-    }
-
-    case FORGOT_REQUEST: {
-      return {
-        ...state,
-        forgotRequest: true,
-        forgotFailed: false,
-        forgotCodeSend: false,
-      };
-    }
-    case FORGOT_SUCCESS: {
-      return {
-        ...state,
-        forgotRequest: false,
-        forgotFailed: false,
-        forgotCodeSend: true,
-      };
-    }
-    case FORGOT_FAILED: {
-      return {
-        ...state,
-        forgotRequest: false,
-        forgotFailed: true,
-        forgotCodeSend: false,
-      };
-    }
-
-    case RESET_REQUEST: {
-      return {
-        ...state,
-        resetRequest: true,
-        resetFailed: false,
-        resetSucces: false,
-      };
-    }
-    case RESET_SUCCESS: {
-      return {
-        ...state,
-        resetRequest: false,
-        resetFailed: false,
-        resetSuccess: true,
-      };
-    }
-    case RESET_FAILED: {
-      return {
-        ...state,
-        resetRequest: false,
-        resetFailed: true,
-        resetSucces: false,
       };
     }
 
