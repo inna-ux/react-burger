@@ -1,42 +1,42 @@
 @import url(../../fonts/fonts.css);
 .wrapper {
-    background-image: url("../../images/not-found-bg.svg");
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
-    background-position: bottom;
-    background-position-x: -25vw;
-    background-repeat: no-repeat;
-  }
-  
-  .container {
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 40px * 2);
-  }
-  
-  .content {
-    font-family: 'IBM Plex Sans', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    margin: auto;
-  }
-  h1 {
-    color: #EBCF47;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 40px;
-    line-height: 48px;
-    margin: 10px 0 20px;
-  }
-  p {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 20px;
-  }
-  
-  .link {
-    color :#EBCF47;
-  }
+  background-image: url("../../images/not-found-bg.svg");
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: bottom;
+  background-position-x: -25vw;
+  background-repeat: no-repeat;
+}
+
+.container {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 40px * 2);
+}
+
+.content {
+  font-family: "IBM Plex Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: auto;
+}
+h1 {
+  color: #ebcf47;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 48px;
+  margin: 10px 0 20px;
+}
+p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.link {
+  color: #ebcf47;
+}
