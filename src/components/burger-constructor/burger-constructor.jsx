@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Button,
   ConstructorElement,
@@ -25,9 +26,11 @@ import {
 import { ContentBurger } from "./content-burger";
 
 function BurgerConstructor() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   const saucesMains = useSelector(
     (store) => store.listIngredientsBurgerConstructor.otherIngredients
   );
@@ -42,7 +45,7 @@ function BurgerConstructor() {
       if (item.type === "bun") {
         dispatch(addBunsInConstructor([item, item]));
       } else {
-        dispatch( addIngridient(item));
+        dispatch(addIngridient(item));
       }
     },
     collect: (monitor) => ({
@@ -74,12 +77,16 @@ function BurgerConstructor() {
     dispatch({ type: RESET_INGREDIENTS });
   };
   const onClick = () => {
-    const orderArray = [buns._id]
-      .concat(saucesMains.map((item) => item._id))
-      .concat([buns._id]);
-    dispatch(addOrderitems(orderArray));
-    dispatch(getOrderData(orderArray));
-    setOpen(true);
+    if (!user) {
+      navigate({ pathname: "/login", state: { from: location } });
+    } else {
+      const orderArray = [buns._id]
+        .concat(saucesMains.map((item) => item._id))
+        .concat([buns._id]);
+      dispatch(addOrderitems(orderArray));
+      dispatch(getOrderData(orderArray));
+      setOpen(true);
+    }
   };
 
   const [active, setActive] = useState(true);
@@ -135,7 +142,6 @@ function BurgerConstructor() {
                     item={item}
                     index={index}
                     moveList={moveList}
-                    
                   />
                 </li>
               ))}
