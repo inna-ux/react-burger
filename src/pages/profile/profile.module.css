@@ -1,0 +1,40 @@
+.profilePage {
+  display: flex;
+  margin: 180px auto auto;
+  max-width: 1240px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #8585ad;
+  padding: 0;
+  width: 320px;
+  height: fit-content;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8585ad;
+  height: 64px;
+}
+
+.active {
+  color: #f2f2f3;
+}
+
+.text {
+  text-align: start;
+  color: #8585ad;
+  opacity: 0.4;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px;
+}
