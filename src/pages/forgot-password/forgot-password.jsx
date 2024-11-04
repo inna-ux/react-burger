@@ -3,14 +3,31 @@ import {
   EmailInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./forgot-password.module.css";
+import { forgotPassword } from "../../utils/api";
 
 function ForgotPassword() {
-  const [value, setValue] = React.useState("bob@example.com");
+  const [email, setEmail] = React.useState(" ");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const onChange = (e) => {
-    setValue(e.target.value);
+    setEmail(e.target.value);
+  };
+
+  const loginClick = () => {
+    navigate("/login");
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (email) {
+      forgotPassword(email).then(() => {
+        localStorage.setItem("passwordReset", "true");
+        navigate("/reset-password", { state: { prevName: location.pathname } });
+      });
+    }
   };
 
   return (
@@ -19,17 +36,17 @@ function ForgotPassword() {
         Восстановление пароля
       </h2>
 
-      <form className={styles.form}>
+      <form onSubmit={onSubmit} className={styles.form}>
         <EmailInput
           placeholder="Укажите e-mail"
           onChange={onChange}
-          value={value}
+          value={email}
           name={"email"}
           isIcon={false}
           extraClass="mb-2 mb-6"
         />
 
-        <Button htmlType="button" type="primary" size="medium">
+        <Button htmlType="submit" type="primary" size="medium">
           Восстановить
         </Button>
       </form>
@@ -38,11 +55,15 @@ function ForgotPassword() {
         <p className="text text_type_main-default text_color_inactive">
           Вспомнили пароль?
         </p>
-        <Link to="/login">
-          <Button htmlType="button" type="secondary" size="small">
-            Войти
-          </Button>
-        </Link>
+
+        <Button
+          onClick={loginClick}
+          htmlType="button"
+          type="secondary"
+          size="small"
+        >
+          Войти
+        </Button>
       </div>
     </div>
   );

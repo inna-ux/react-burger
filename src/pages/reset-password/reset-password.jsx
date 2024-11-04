@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import styles from "./reset-password.module.css";
+import { resetPassword } from "../../utils/api";
 
 function ResetPassword() {
-  const [value, setValue] = React.useState("value");
-  const [pasvalue, setPasValue] = React.useState("password");
+  const [values, setValues] = useState({
+    newPassword: "",
+    code: "",
+  });
 
   const inputRef = React.useRef(null);
   const navigate = useNavigate();
@@ -19,12 +22,24 @@ function ResetPassword() {
     alert("Icon Click Callback");
   };
 
-  const onChangePas = (e) => {
-    setPasValue(e.target.value);
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
-  const loginClick = () => {
-    navigate("/login")
 
+  const loginClick = () => {
+    navigate("/login");
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    resetPassword(values.newPassword, values.code).then(() => {
+      localStorage.removeItem("passwordReset");
+      navigate("/login");
+    });
+  };
+
+  if (!localStorage.getItem("passwordReset")) {
+    return <Navigate to="/forgot-password" />;
   }
 
   return (
@@ -33,18 +48,18 @@ function ResetPassword() {
         Вход
       </h2>
 
-      <form className={styles.form}>
+      <form onSubmit={onSubmit} className={styles.form}>
         <PasswordInput
           placeholder="Введите новый пароль"
-          value={pasvalue}
+          value={values.newPassword ?? ""}
           name={"newPassword"}
-          onChange={onChangePas}
+          onChange={onChange}
         />
         <Input
           type={"text"}
           placeholder={"Введите код из письма"}
-          onChange={(e) => setValue(e.target.value)}
-          value={value}
+          onChange={onChange}
+          value={values.code ?? ""}
           name={"code"}
           error={false}
           ref={inputRef}
@@ -63,9 +78,14 @@ function ResetPassword() {
         <p className="text text_type_main-default text_color_inactive">
           Вспомнили пароль?
         </p>
-        <Button htmlType="button" onClick={loginClick} type="secondary" size="small">
-            Войти
-          </Button>
+        <Button
+          htmlType="button"
+          onClick={loginClick}
+          type="secondary"
+          size="small"
+        >
+          Войти
+        </Button>
       </div>
     </div>
   );
