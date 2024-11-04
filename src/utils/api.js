@@ -14,94 +14,85 @@ const checkResponse = (res) => {
 export function postOrderData(orderData) {
   return fetch(`${Ingredient}/orders`, {
     method: "POST",
-    headers: { "Content-type": "application/json" },
+    headers: {
+      "Content-type": "application/json",
+      authorization: `${getCookie("accessToken")}`,
+    },
     body: JSON.stringify({
       ingredients: orderData,
     }),
   }).then((res) => checkResponse(res));
 }
 
-
 //запрос на получение письма для сброса пароля
 export function forgotPassword(email) {
   return fetch(`${Ingredient}/password-reset`, {
-    method: 'POST',
+    method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify({
-      "email": `${email}`
-    })
-  })
-    .then(res => checkResponse(res))
+      email: `${email}`,
+    }),
+  }).then((res) => checkResponse(res));
 }
 
 //запрос на обновление пароля
 export function resetPassword(password, token) {
   return fetch(`${Ingredient}/password-reset/reset`, {
-    method: 'POST',
+    method: "POST",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify(
-      {
-        "password": `${password}`,
-        "token": `${token}`
-      }
-    )
-  })
-    .then(res => checkResponse(res))
+    body: JSON.stringify({
+      password: `${password}`,
+      token: `${token}`,
+    }),
+  }).then((res) => checkResponse(res));
 }
 
 //создание пользователя
 export function user(email, password, name) {
   return fetch(`${Ingredient}/auth/register`, {
-    method: 'POST',
+    method: "POST",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify(
-      {
-        "email": `${email}`,
-        "password": `${password}`,
-        "name": `${name}`
-      }
-    )
-  })
-    .then(res => checkResponse(res))
+    body: JSON.stringify({
+      email: `${email}`,
+      password: `${password}`,
+      name: `${name}`,
+    }),
+  }).then((res) => checkResponse(res));
 }
 
 //авторизация
 export function login(email, password) {
   return fetch(`${Ingredient}/auth/login`, {
-    method: 'POST',
+    method: "POST",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify(
-      {
-        "email": `${email}`,
-        "password": `${password}`
-      }
-    )
-  })
-    .then(res => checkResponse(res))
+    body: JSON.stringify({
+      email: `${email}`,
+      password: `${password}`,
+    }),
+  }).then((res) => checkResponse(res));
 }
-
 
 //получение данных пользователя
 
 export const getUser = () => {
   return fetch(`${Ingredient}/auth/user`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'authorization': `${getCookie('accessToken')}`
+      "Content-Type": "application/json",
+      authorization: `${getCookie("accessToken")}`,
     },
   })
     .then(checkResponse)
     .catch((err) => {
-      if (err.message === 'jwt expired') {
+      if (err.message === "jwt expired") {
         refreshToken().then((res) => {
-          setCookie('accessToken', res.accessToken);
-          localStorage.setItem('refreshToken', res.refreshToken);
+          setCookie("accessToken", res.accessToken);
+          localStorage.setItem("refreshToken", res.refreshToken);
           fetch(`${Ingredient}/auth/user`, {
-            method: 'GET',
+            method: "GET",
             headers: {
-              'Content-Type': 'application/json',
-             'authorization': `${getCookie('accessToken')}`,
+              "Content-Type": "application/json",
+              authorization: `${getCookie("accessToken")}`,
             },
           }).then(checkResponse);
         });
@@ -114,40 +105,35 @@ export const getUser = () => {
 //обновление данных пользователя через профиль
 export function updateUser(name, email, password) {
   return fetch(`${Ingredient}/auth/user`, {
-    method: 'PATCH',
+    method: "PATCH",
     headers: {
-      'Content-Type': 'application/json',
-       'authorization': `${getCookie('accessToken')}`
+      "Content-Type": "application/json",
+      authorization: `${getCookie("accessToken")}`,
     },
-    body: JSON.stringify(
-      {
-        "email": `${email}`,
-        "password": `${password}`,
-        "name": `${name}`
-      }
-    )
-  })
-    .then(res => checkResponse(res))
+    body: JSON.stringify({
+      email: `${email}`,
+      password: `${password}`,
+      name: `${name}`,
+    }),
+  }).then((res) => checkResponse(res));
 }
-
 
 //обновление токена
 export const refreshToken = () => {
   return fetch(`${Ingredient}/auth/token`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'authorization': localStorage.getItem('refreshToken') || '',
+      "Content-Type": "application/json",
+      authorization: localStorage.getItem("refreshToken") || "",
     },
     body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
-  }).then(res => checkResponse(res));
+  }).then((res) => checkResponse(res));
 };
 //логаут
 export function logoutUser() {
   return fetch(`${Ingredient}/auth/logout`, {
-    method: 'POST',
+    method: "POST",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify({ token: localStorage.getItem("refreshToken") })
-  })
-    .then((res) => checkResponse(res))
+    body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
+  }).then((res) => checkResponse(res));
 }
