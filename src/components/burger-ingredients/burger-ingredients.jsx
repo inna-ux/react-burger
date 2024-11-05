@@ -4,22 +4,21 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsGroup from "./ingredients-group/ingredients-group";
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import IngredientsDetails from "../ingredient-details/ingredient-details";
-import { Modal } from "../modal/modal";
-
-import { closeIngredientInfo } from "../../services/actions/ingredient-details-info";
-import { useDispatch, useSelector } from "react-redux";
+// import IngredientsDetails from "../ingredient-details/ingredient-details";
+// import { Modal } from "../modal/modal";
+// import { closeIngredientInfo } from "../../services/actions/ingredient-details-info";
+import { useSelector } from "react-redux";
 import { getAllBuns, getAllSauce, getAllMain } from "../../services/selectors";
 
 function BurgerIngredients() {
   const [current, setCurrent] = useState("buns");
 
-  const [modalActive, setModalActive] = useState(false);
-  const dispatch = useDispatch();
-  const onClose = () => {
-    setModalActive(false);
-    dispatch(closeIngredientInfo());
-  };
+  // const [modalActive, setModalActive] = useState(false);
+  // const dispatch = useDispatch();
+  // const onClose = () => {
+  //   setModalActive(false);
+  //   dispatch(closeIngredientInfo());
+  // };
 
   const buns = useSelector(getAllBuns);
   const mains = useSelector(getAllMain);
@@ -48,7 +47,7 @@ function BurgerIngredients() {
   return (
     <section className={`${IngredientsStyles.section}`}>
       <h1
-        className={`${IngredientsStyles.title}text text_type_main-large mt-10 mb-5`}
+        className={`${IngredientsStyles.title} text text_type_main-large mt-10 mb-5`}
       >
         Соберите бургер
       </h1>
@@ -82,29 +81,29 @@ function BurgerIngredients() {
           titleId={"buns"}
           data={buns}
           title="Булки"
-          onClick={setModalActive}
+          // onClick={setModalActive}
         />
         <BurgerIngredientsGroup
           innerRef={sausesRef}
           titleId={"sauces"}
           data={sauces}
           title="Соусы"
-          onClick={setModalActive}
+          // onClick={setModalActive}
         />
         <BurgerIngredientsGroup
           innerRef={mainRef}
           titleId={"main"}
           data={mains}
           title="Начинки"
-          onClick={setModalActive}
+          // onClick={setModalActive}
         />
       </div>
 
-      {modalActive && (
+      {/* {modalActive && (
         <Modal title={"Детали ингредиента"} onClose={onClose}>
           <IngredientsDetails />
         </Modal>
-      )}
+      )} */}
     </section>
   );
 }
