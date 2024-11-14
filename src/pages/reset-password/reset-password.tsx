@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import {
   Button,
   Input,
@@ -14,15 +14,10 @@ function ResetPassword() {
     code: "",
   });
 
-  const inputRef = React.useRef(null);
+  const [disabled, setDisabled] = useState(true);
   const navigate = useNavigate();
 
-  const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0);
-    alert("Icon Click Callback");
-  };
-
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
@@ -30,7 +25,7 @@ function ResetPassword() {
     navigate("/login");
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     resetPassword(values.newPassword, values.code).then(() => {
       localStorage.removeItem("passwordReset");
@@ -62,8 +57,9 @@ function ResetPassword() {
           value={values.code ?? ""}
           name={"code"}
           error={false}
-          ref={inputRef}
-          onIconClick={onIconClick}
+          disabled={disabled}
+          onIconClick={() => setDisabled(false)}
+          icon="EditIcon"
           errorText={"Ошибка"}
           size={"default"}
           extraClass="ml-1"

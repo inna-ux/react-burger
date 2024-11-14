@@ -1,12 +1,24 @@
 import { useDrag, useDrop } from "react-dnd";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useRef } from "react";
-import PropTypes from "prop-types";
-import { ingredientPropTypes } from "../../utils/prop-types";
+
 import { useDispatch } from "react-redux";
 import { DELETE_INGREDIENT } from "../../services/actions/ingredients-constructor";
+import { TIngredient } from "../../utils/types";
 
-export const ContentBurger = ({ item, index, moveList }) => {
+type TContentBurgerProps = {
+  item: TIngredient;
+  index: number;
+  moveList: (a: number, b: number) => void
+}
+type TContentBurger = {
+  type?: string;
+  item: TIngredient;
+  index: number;
+};
+
+
+export const ContentBurger = ({ item, index, moveList }: TContentBurgerProps): React.JSX.Element => {
   const dispatch = useDispatch();
 
   // useDrag - элемент списка можно перетаскивать
@@ -21,9 +33,11 @@ export const ContentBurger = ({ item, index, moveList }) => {
   // useDrop - элемент списка также является областью перетаскивания
   const [, dropRef] = useDrop({
     accept: "item",
-    hover: (item, monitor) => {
+    hover: (item: TContentBurger, monitor: any) => {
+      if (!ref.current) { return };
       const dragIndex = item.index;
       const hoverIndex = index;
+      if (dragIndex === hoverIndex) { return };
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
@@ -41,13 +55,13 @@ export const ContentBurger = ({ item, index, moveList }) => {
   });
 
   // Объединиe 2х ссылок в одну (обе можно перетаскивать и на них можно наклеивать).
-  const ref = useRef(null);
-  const dragDropRef = dragRef(dropRef(ref));
+  const ref = useRef<HTMLDivElement>(null);
+  dragRef(dropRef(ref));
 
   //Сделала перетаскиваемые элементы прозрачными, чтобы было легче видеть, куда мы их помещаем
   const opacity = isDragging ? 0 : 1;
   return (
-    <div style={{ opacity }} draggable ref={dragDropRef}>
+    <div style={{ opacity }} draggable ref={ref}>
       <ConstructorElement
         text={String(item?.name)}
         price={Number(item?.price)}
@@ -56,9 +70,4 @@ export const ContentBurger = ({ item, index, moveList }) => {
       />
     </div>
   );
-};
-ContentBurger.propTypes = {
-  index: PropTypes.number.isRequired,
-  item: ingredientPropTypes.isRequired,
-  moveList: PropTypes.func.isRequired,
 };

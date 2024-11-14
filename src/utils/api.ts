@@ -4,14 +4,14 @@ const Ingredient = "https://norma.nomoreparties.space/api";
 export function getIngredients() {
   return fetch(`${Ingredient}/ingredients`).then((res) => checkResponse(res));
 }
-const checkResponse = (res) => {
+const checkResponse = (res: Response) => {
   if (res.ok) {
     return res.json();
   }
   return Promise.reject(`Ошибка ${res.status}`);
 };
 
-export function postOrderData(orderData) {
+export function postOrderData(orderData: string[]) {
   return fetch(`${Ingredient}/orders`, {
     method: "POST",
     headers: {
@@ -25,7 +25,7 @@ export function postOrderData(orderData) {
 }
 
 //запрос на получение письма для сброса пароля
-export function forgotPassword(email) {
+export function forgotPassword(email: string) {
   return fetch(`${Ingredient}/password-reset`, {
     method: "POST",
     headers: { "Content-type": "application/json" },
@@ -36,7 +36,7 @@ export function forgotPassword(email) {
 }
 
 //запрос на обновление пароля
-export function resetPassword(password, token) {
+export function resetPassword(password: string, token: string) {
   return fetch(`${Ingredient}/password-reset/reset`, {
     method: "POST",
     headers: { "Content-type": "application/json" },
@@ -48,7 +48,7 @@ export function resetPassword(password, token) {
 }
 
 //создание пользователя
-export function user(email, password, name) {
+export function user(email: string, password: string, name: string) {
   return fetch(`${Ingredient}/auth/register`, {
     method: "POST",
     headers: { "Content-type": "application/json" },
@@ -61,7 +61,7 @@ export function user(email, password, name) {
 }
 
 //авторизация
-export function login(email, password) {
+export function login(email: string, password: string) {
   return fetch(`${Ingredient}/auth/login`, {
     method: "POST",
     headers: { "Content-type": "application/json" },
@@ -103,7 +103,7 @@ export const getUser = () => {
 };
 
 //обновление данных пользователя через профиль
-export function updateUser(name, email, password) {
+export function updateUser(name: string, email: string, password: string) {
   return fetch(`${Ingredient}/auth/user`, {
     method: "PATCH",
     headers: {

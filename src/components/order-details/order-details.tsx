@@ -4,6 +4,7 @@ import graphics from "../../images/graphics.svg";
 import style from "./order-details.module.css";
 
 function OrderDetails() {
+  // @ts-ignore
   const orderNumber = useSelector((state) => state.createdOrder.orderNumber);
 
   return (

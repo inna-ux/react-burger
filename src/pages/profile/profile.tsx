@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import {
   EmailInput,
   Input,
@@ -6,17 +6,17 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile.module.css";
-import { Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUserAction } from "../../services/actions/user/set-user";
 import updateUserAction from "../../services/actions/user/update-user";
-import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // @ts-ignore
   const userInfo = useSelector((store) => store.user.user);
-  const [current, setCurrent] = useState("profile");
+
   const [disabled, setDisabled] = useState(true);
   const [userInfoProfile, setUserInfoProfile] = useState({
     name: userInfo.name,
@@ -25,18 +25,16 @@ function Profile() {
   });
   const [activeButtons, setActiveButtons] = useState(false);
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInfoProfile({ ...userInfoProfile, [e.target.name]: e.target.value });
     setActiveButtons(true);
   };
 
-  const onClick = (e) => {
-    setCurrent(e.target.name);
-  };
-
-  const onSubmit = (e) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     dispatch(
+      // @ts-ignore
       updateUserAction(
         userInfoProfile.name,
         userInfoProfile.email,
@@ -53,8 +51,8 @@ function Profile() {
     });
   };
 
-  const logOut = (e) => {
-    setCurrent(e.target.name);
+  const logOut = () => {
+    // @ts-ignore
     dispatch(logoutUserAction(() => navigate("/login")));
   };
 
@@ -68,46 +66,46 @@ function Profile() {
     ) {
       setActiveButtons(false);
     }
-  }, [userInfoProfile]);
+  }, [userInfo.email, userInfo.name, userInfoProfile]);
 
   return (
     <div className={styles.profilePage}>
       <section className={`${styles.links} mr-15`}>
-        <Link
-          name="profile"
-          to={{ pathname: "/profile" }}
-          className={`${styles.link} ${
-            current === "profile" ? styles.active : null
-          } text text_type_main-medium`}
-          onClick={onClick}
+        <NavLink
+          end
+          to="/profile"
+          className={({ isActive }) =>
+            isActive
+              ? `${styles.link} ${styles.active} text text_type_main-medium`
+              : `${styles.link} text text_type_main-medium`
+          }
         >
           Профиль
-        </Link>
-        <Link
-          name="history"
-          to={{ pathname: "/profile/orders" }}
-          className={`${styles.link} ${
-            current === "history" ? styles.active : null
-          } text text_type_main-medium`}
-          onClick={onClick}
+        </NavLink>
+        <NavLink
+          to="/profile/orders"
+          className={({ isActive }) =>
+            isActive
+              ? `${styles.link} ${styles.active} text text_type_main-medium`
+              : `${styles.link} text text_type_main-medium`
+          }
         >
           История заказов
-        </Link>
-        <Link
-          name="exit"
-          className={`${styles.link} ${
-            current === "exit" ? styles.active : null
-          } text text_type_main-medium`}
+        </NavLink>
+        <NavLink
+          to="/login"
+          className={`${styles.link} text text_type_main-medium`}
           onClick={logOut}
         >
           Выход
-        </Link>
+        </NavLink>
         <p className={`${styles.text} text text_type_main-default mt-8`}>
           В этом разделе вы можете изменить свои персональные данные.
         </p>
       </section>
       <form onSubmit={onSubmit} className={styles.form}>
         <Input
+          type={"text"}
           placeholder="Имя"
           value={userInfoProfile.name}
           name={"name"}
@@ -115,7 +113,10 @@ function Profile() {
           icon="EditIcon"
           disabled={disabled}
           onIconClick={() => setDisabled(false)}
+          error={false}
+          errorText={"Ошибка"}
         />
+
         <EmailInput
           placeholder="Логин"
           value={userInfoProfile.email}

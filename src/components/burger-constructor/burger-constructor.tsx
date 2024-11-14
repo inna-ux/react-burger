@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   ConstructorElement,
@@ -24,24 +24,29 @@ import {
   addIngridient,
 } from "../../services/actions/ingredients-constructor";
 import { ContentBurger } from "./content-burger";
+import { TIngredient } from "../../utils/types";
 
 function BurgerConstructor() {
-  const location = useLocation();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
+  // @ts-ignore
   const user = useSelector((state) => state.user.user);
+
   const saucesMains = useSelector(
+    // @ts-ignore
     (store) => store.listIngredientsBurgerConstructor.otherIngredients
   );
   const buns = useSelector(
+    // @ts-ignore
     (store) => store.listIngredientsBurgerConstructor.buns
   );
+  // @ts-ignore
   const { orderNumber } = useSelector((state) => state.createdOrder);
 
   const [{ isHover }, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(item) {
+    drop(item: TIngredient) {
       if (item.type === "bun") {
         dispatch(addBunsInConstructor([item, item]));
       } else {
@@ -55,7 +60,7 @@ function BurgerConstructor() {
   const borderColor = isHover ? "lightgreen" : "transparent";
 
   const moveList = useCallback(
-    (dragIndex, hoverIndex) => {
+    (dragIndex: number, hoverIndex: number) => {
       dispatch({ type: MOVE_INGREDIENTS, dragIndex, hoverIndex });
     },
     [dispatch]
@@ -63,10 +68,10 @@ function BurgerConstructor() {
 
   const totalCost = useMemo(() => {
     let total = 0;
-    saucesMains.map((item) => {
+    saucesMains.map((item: TIngredient) => {
       return (total = total + item.price);
     });
-    buns.map((item) => {
+    buns.map((item: TIngredient) => {
       return (total = total + item.price);
     });
     return total;
@@ -78,12 +83,13 @@ function BurgerConstructor() {
   };
   const onClick = () => {
     if (!user) {
-      navigate({ pathname: "/login", state: { from: location } });
+      return navigate("/login");
     } else {
       const orderArray = [buns._id]
-        .concat(saucesMains.map((item) => item._id))
+        .concat(saucesMains.map((item: TIngredient) => item._id))
         .concat([buns._id]);
       dispatch(addOrderitems(orderArray));
+      // @ts-ignore
       dispatch(getOrderData(orderArray));
       setOpen(true);
     }
@@ -135,7 +141,7 @@ function BurgerConstructor() {
             </div>
           ) : (
             <ul className={style.list}>
-              {saucesMains.map((item, index) => (
+              {saucesMains.map((item: TIngredient, index: number) => (
                 <li key={item.id} className={style.card__list_item}>
                   <DragIcon type="primary" />
                   <ContentBurger
@@ -173,10 +179,7 @@ function BurgerConstructor() {
       <div className={`${style.full_price_container} mt-10`}>
         <div className={`${style.full_price} mr-10`}>
           <p className="text text_type_digits-medium mr-3">{totalCost}</p>
-          <CurrencyIcon
-            style={{ width: "33px", height: "33px" }}
-            type="primary"
-          />
+          <CurrencyIcon type="primary" />
         </div>
         <Button
           disabled={active}
@@ -189,7 +192,7 @@ function BurgerConstructor() {
         </Button>
 
         {open && orderNumber > 0 && (
-          <Modal onClose={onClose}>
+          <Modal title={""} onClose={onClose}>
             <OrderDetails />
           </Modal>
         )}
