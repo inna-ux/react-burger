@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   ConstructorElement,
@@ -26,16 +26,13 @@ import {
 import { ContentBurger } from "./content-burger";
 import { TIngredient } from "../../utils/types";
 
-
-
 function BurgerConstructor() {
-
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   // @ts-ignore
   const user = useSelector((state) => state.user.user);
-  
+
   const saucesMains = useSelector(
     // @ts-ignore
     (store) => store.listIngredientsBurgerConstructor.otherIngredients
@@ -86,7 +83,7 @@ function BurgerConstructor() {
   };
   const onClick = () => {
     if (!user) {
-       return (navigate('/login'))
+      return navigate("/login");
     } else {
       const orderArray = [buns._id]
         .concat(saucesMains.map((item: TIngredient) => item._id))
@@ -182,9 +179,7 @@ function BurgerConstructor() {
       <div className={`${style.full_price_container} mt-10`}>
         <div className={`${style.full_price} mr-10`}>
           <p className="text text_type_digits-medium mr-3">{totalCost}</p>
-          <CurrencyIcon
-            type="primary"
-          />
+          <CurrencyIcon type="primary" />
         </div>
         <Button
           disabled={active}

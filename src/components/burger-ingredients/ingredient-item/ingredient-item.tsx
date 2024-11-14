@@ -13,9 +13,11 @@ import { TIngredient } from "../../../utils/types";
 
 type TBurgerIngredientItemProps = {
   ingredientData: TIngredient;
-}
+};
 
-function BurgerIngredientItem({ ingredientData }: TBurgerIngredientItemProps): React.JSX.Element {
+function BurgerIngredientItem({
+  ingredientData,
+}: TBurgerIngredientItemProps): React.JSX.Element {
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -41,7 +43,8 @@ function BurgerIngredientItem({ ingredientData }: TBurgerIngredientItemProps): R
   });
   const getCounter = (state: any[]) => {
     return state.reduce(
-      (acc: number, el: { _id: string; }) => (el._id === ingredientData._id ? ++acc : acc),
+      (acc: number, el: { _id: string }) =>
+        el._id === ingredientData._id ? ++acc : acc,
       0
     );
   };
@@ -51,33 +54,30 @@ function BurgerIngredientItem({ ingredientData }: TBurgerIngredientItemProps): R
   };
   return (
     <>
-     {!isDrag && (
-      <Link
-        to={`/ingredients/${ingredientData._id}`}
-        state={{ background: location }}
-        ref={dragRef}
-        onClick={handler}
-        className={`${itemStyles.card__item} pb-8`}
-      >
-        {count === 0 ? null : <Counter count={count} size="default" />}
+      {!isDrag && (
+        <Link
+          to={`/ingredients/${ingredientData._id}`}
+          state={{ background: location }}
+          ref={dragRef}
+          onClick={handler}
+          className={`${itemStyles.card__item} pb-8`}
+        >
+          {count === 0 ? null : <Counter count={count} size="default" />}
 
-        <img src={ingredientData.image} alt="the ingredient" />
+          <img src={ingredientData.image} alt="the ingredient" />
 
-        <div className={`${itemStyles.price} pt-1 pb-1 `}>
-          <h3 className="text text_type_digits-default ">
-            {ingredientData.price}
-          </h3>
-          <CurrencyIcon type="primary" />
-        </div>
+          <div className={`${itemStyles.price} pt-1 pb-1 `}>
+            <h3 className="text text_type_digits-default ">
+              {ingredientData.price}
+            </h3>
+            <CurrencyIcon type="primary" />
+          </div>
 
-        <p className="text text_type_main-small ">{ingredientData.name}</p>
-      </Link>
-    )}
+          <p className="text text_type_main-small ">{ingredientData.name}</p>
+        </Link>
+      )}
     </>
-   
   );
 }
-
-
 
 export default BurgerIngredientItem;

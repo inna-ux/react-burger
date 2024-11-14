@@ -11,15 +11,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { logoutUserAction } from "../../services/actions/user/set-user";
 import updateUserAction from "../../services/actions/user/update-user";
 
-
-
-
 function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // @ts-ignore
   const userInfo = useSelector((store) => store.user.user);
- 
+
   const [disabled, setDisabled] = useState(true);
   const [userInfoProfile, setUserInfoProfile] = useState({
     name: userInfo.name,
@@ -32,13 +29,12 @@ function Profile() {
     setUserInfoProfile({ ...userInfoProfile, [e.target.name]: e.target.value });
     setActiveButtons(true);
   };
- 
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     dispatch(
-       // @ts-ignore
+      // @ts-ignore
       updateUserAction(
         userInfoProfile.name,
         userInfoProfile.email,
@@ -56,7 +52,7 @@ function Profile() {
   };
 
   const logOut = () => {
-     // @ts-ignore
+    // @ts-ignore
     dispatch(logoutUserAction(() => navigate("/login")));
   };
 
@@ -75,16 +71,41 @@ function Profile() {
   return (
     <div className={styles.profilePage}>
       <section className={`${styles.links} mr-15`}>
-      <NavLink end to="/profile" className={({isActive}) => isActive ? `${styles.link} ${styles.active} text text_type_main-medium` : `${styles.link} text text_type_main-medium`}>Профиль</NavLink>
-        <NavLink to="/profile/orders" className={({isActive}) => isActive ? `${styles.link} ${styles.active} text text_type_main-medium` : `${styles.link} text text_type_main-medium`}>История заказов</NavLink>
-        <NavLink to="/login" className={`${styles.link} text text_type_main-medium`} onClick={logOut}>Выход</NavLink>
+        <NavLink
+          end
+          to="/profile"
+          className={({ isActive }) =>
+            isActive
+              ? `${styles.link} ${styles.active} text text_type_main-medium`
+              : `${styles.link} text text_type_main-medium`
+          }
+        >
+          Профиль
+        </NavLink>
+        <NavLink
+          to="/profile/orders"
+          className={({ isActive }) =>
+            isActive
+              ? `${styles.link} ${styles.active} text text_type_main-medium`
+              : `${styles.link} text text_type_main-medium`
+          }
+        >
+          История заказов
+        </NavLink>
+        <NavLink
+          to="/login"
+          className={`${styles.link} text text_type_main-medium`}
+          onClick={logOut}
+        >
+          Выход
+        </NavLink>
         <p className={`${styles.text} text text_type_main-default mt-8`}>
           В этом разделе вы можете изменить свои персональные данные.
         </p>
       </section>
       <form onSubmit={onSubmit} className={styles.form}>
         <Input
-          type={'text'}
+          type={"text"}
           placeholder="Имя"
           value={userInfoProfile.name}
           name={"name"}
@@ -93,9 +114,8 @@ function Profile() {
           disabled={disabled}
           onIconClick={() => setDisabled(false)}
           error={false}
-          errorText={'Ошибка'} 
-          //  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}   
-               />
+          errorText={"Ошибка"}
+        />
 
         <EmailInput
           placeholder="Логин"

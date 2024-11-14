@@ -8,7 +8,7 @@ type TIngredientBoxProps = {
   innerRef: any;
   title: string;
   titleId: any;
-}
+};
 
 function BurgerIngredientsGroup(props: TIngredientBoxProps): React.JSX.Element {
   return (
@@ -30,6 +30,5 @@ function BurgerIngredientsGroup(props: TIngredientBoxProps): React.JSX.Element {
     </>
   );
 }
-
 
 export default BurgerIngredientsGroup;

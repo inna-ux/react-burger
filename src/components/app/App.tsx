@@ -35,7 +35,7 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-     // @ts-ignore
+    // @ts-ignore
     dispatch(getIngredientsData());
   }, [dispatch]);
 

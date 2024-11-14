@@ -5,7 +5,7 @@ import { TIngredient } from "../../utils/types";
 
 function IngredientsDetails() {
   const { id } = useParams();
-    // @ts-ignore
+  // @ts-ignore
   const itemsLoaded = useSelector((store) => store.listIngredients.data);
   const ingredient = itemsLoaded.find((item: TIngredient) => item._id === id);
   return (

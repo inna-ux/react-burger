@@ -17,8 +17,6 @@ function ResetPassword() {
   const [disabled, setDisabled] = useState(true);
   const navigate = useNavigate();
 
- 
-
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -62,12 +60,10 @@ function ResetPassword() {
           disabled={disabled}
           onIconClick={() => setDisabled(false)}
           icon="EditIcon"
-
           errorText={"Ошибка"}
           size={"default"}
           extraClass="ml-1"
-          //  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}   
-                />
+        />
 
         <Button htmlType="submit" type="primary" size="medium">
           Сохранить

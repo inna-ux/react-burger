@@ -11,11 +11,15 @@ const modalRootElement = document.querySelector("#modal") as HTMLElement;
 
 type TModalProps = {
   children: JSX.Element;
-  onClose: (() => void);
+  onClose: () => void;
   title: string;
-}
+};
 
-export const Modal = ({ onClose, children, title }: TModalProps): React.JSX.Element => {
+export const Modal = ({
+  onClose,
+  children,
+  title,
+}: TModalProps): React.JSX.Element => {
   useEffect(() => {
     function closeByEscape(evt: KeyboardEvent) {
       if (evt.key === "Escape") {
@@ -45,4 +49,3 @@ export const Modal = ({ onClose, children, title }: TModalProps): React.JSX.Elem
     modalRootElement
   );
 };
-

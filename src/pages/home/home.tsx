@@ -11,7 +11,7 @@ function HomePage() {
     // @ts-ignore
     (store) => store.listIngredients
   );
-// @ts-ignore
+  // @ts-ignore
   const { orderRequest } = useSelector((store) => store.createdOrder);
 
   return (

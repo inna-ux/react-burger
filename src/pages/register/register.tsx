@@ -23,7 +23,7 @@ function Register() {
   };
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-     // @ts-ignore
+    // @ts-ignore
     dispatch(userAction(userInfo.email, userInfo.password, userInfo.name));
   };
 
@@ -44,7 +44,8 @@ function Register() {
           error={false}
           errorText={"Ошибка"}
           size={"default"}
-          extraClass="ml-1" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        />
+          extraClass="ml-1"
+        />
         <EmailInput
           placeholder="E-mail"
           onChange={onChange}
