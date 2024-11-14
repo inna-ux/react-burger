@@ -1,4 +1,4 @@
-import { getIngredients } from "../../utils/api.js";
+import { getIngredients } from "../../utils/api";
 
 // Получение списка ингредиентов от API. Используется в компоненте BurgerIngredients.
 

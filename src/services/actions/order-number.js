@@ -1,4 +1,4 @@
-import { postOrderData } from "../../utils/api.js";
+import { postOrderData } from "../../utils/api";
 
 export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST"; //тип экшена
 export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";

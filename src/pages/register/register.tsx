@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import {
   EmailInput,
   Input,
@@ -18,11 +18,12 @@ function Register() {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
-  const onSubmit = (e) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+     // @ts-ignore
     dispatch(userAction(userInfo.email, userInfo.password, userInfo.name));
   };
 
@@ -43,8 +44,7 @@ function Register() {
           error={false}
           errorText={"Ошибка"}
           size={"default"}
-          extraClass="ml-1"
-        />
+          extraClass="ml-1" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        />
         <EmailInput
           placeholder="E-mail"
           onChange={onChange}

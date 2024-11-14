@@ -24,7 +24,7 @@ function BurgerIngredients() {
   const mains = useSelector(getAllMain);
   const sauces = useSelector(getAllSauce);
 
-  function handleButtonClick(tab) {
+  function handleButtonClick(tab: string) {
     setCurrent(tab);
     const element = document.getElementById(tab);
     if (element) element.scrollIntoView({ behavior: "smooth" });

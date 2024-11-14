@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 import {
   EmailInput,
   Button,
@@ -12,7 +12,7 @@ function ForgotPassword() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
@@ -20,7 +20,7 @@ function ForgotPassword() {
     navigate("/login");
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (email) {
       forgotPassword(email).then(() => {

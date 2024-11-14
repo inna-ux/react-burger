@@ -1,4 +1,4 @@
-import { login, getUser, logoutUser } from "../../../utils/api.js";
+import { login, getUser, logoutUser } from "../../../utils/api";
 import { setCookie, removeCookie } from "../../../utils/cooke";
 export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
 export const SET_USER = "SET_USER";

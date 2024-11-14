@@ -1,11 +1,12 @@
 import React from "react";
-import { func } from "prop-types";
 import style from "./modal-overlay.module.css";
 
-export const ModalOverlay = ({ onClick }) => {
+type TModalOverlaylProps = {
+  onClick: (() => void);
+}
+
+
+export const ModalOverlay = ({ onClick }: TModalOverlaylProps): React.JSX.Element => {
   return <div onClick={onClick} className={style.modal__overlay}></div>;
 };
 
-ModalOverlay.propTypes = {
-  onClick: func,
-};

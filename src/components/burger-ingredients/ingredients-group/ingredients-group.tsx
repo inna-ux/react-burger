@@ -1,11 +1,16 @@
 import React from "react";
 import groupStyles from "./ingredients-group.module.css";
 import BurgerIngredientItem from "../ingredient-item/ingredient-item";
-import PropTypes from "prop-types";
+import { TIngredient } from "../../../utils/types";
 
-import { ingredientPropTypes } from "../../../utils/prop-types";
+type TIngredientBoxProps = {
+  data: TIngredient[];
+  innerRef: any;
+  title: string;
+  titleId: any;
+}
 
-function BurgerIngredientsGroup(props) {
+function BurgerIngredientsGroup(props: TIngredientBoxProps): React.JSX.Element {
   return (
     <>
       <h2
@@ -26,8 +31,5 @@ function BurgerIngredientsGroup(props) {
   );
 }
 
-BurgerIngredientsGroup.propTypes = {
-  title: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
-};
+
 export default BurgerIngredientsGroup;

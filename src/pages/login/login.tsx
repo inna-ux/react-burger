@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import {
   EmailInput,
   Button,
@@ -14,15 +14,17 @@ function Login() {
     email: "",
     password: "",
   });
+  // @ts-ignore
   const loginFailed = useSelector((state) => state.user.loginFailed);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSignIn({ ...signIn, [e.target.name]: e.target.value });
   };
-  const onSubmit = (e) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // @ts-ignore
     dispatch(loginAction(signIn.email, signIn.password));
   };
   const registerClick = () => {

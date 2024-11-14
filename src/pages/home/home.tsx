@@ -1,16 +1,17 @@
 import { useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients.jsx";
-import BurgerConstructor from "../../components/burger-constructor/burger-constructor.jsx";
+import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
+import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 import styles from "./home.module.css";
-import { Preloader } from "../../components/preloader/preloader.jsx";
+import { Preloader } from "../../components/preloader/preloader";
 
 function HomePage() {
   const { loading, error, data } = useSelector(
+    // @ts-ignore
     (store) => store.listIngredients
   );
-
+// @ts-ignore
   const { orderRequest } = useSelector((store) => store.createdOrder);
 
   return (

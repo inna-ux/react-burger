@@ -1,17 +1,19 @@
 import style from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { TIngredient } from "../../utils/types";
 
 function IngredientsDetails() {
   const { id } = useParams();
+    // @ts-ignore
   const itemsLoaded = useSelector((store) => store.listIngredients.data);
-  const ingredient = itemsLoaded.find((item) => item._id === id);
+  const ingredient = itemsLoaded.find((item: TIngredient) => item._id === id);
   return (
     <>
       {!ingredient ? null : (
         <div className={style.block}>
           <img
-            src={ingredient.image}
+            src={ingredient.image_large}
             alt="the ingredient"
             className={style.img}
           />
