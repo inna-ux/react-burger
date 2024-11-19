@@ -1,13 +1,13 @@
 import { login, getUser, logoutUser } from "../../../utils/api";
 import { setCookie, removeCookie } from "../../../utils/cooke";
-export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
-export const SET_USER = "SET_USER";
-export const GET_USER_REQUEST = "GET_USER_REQUEST";
-export const GET_USER_FAILED = "GET_USER_FAILED";
-export const LOGIN_REQUEST = "LOGIN_REQUEST";
-export const LOGIN_FAILED = "LOGIN_FAILED";
-export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
-export const LOGOUT_FAILED = "LOGOUT_FAILED";
+export const SET_AUTH_CHECKED: "SET_AUTH_CHECKED" = "SET_AUTH_CHECKED";
+export const SET_USER: "SET_USER" = "SET_USER";
+export const GET_USER_REQUEST: "GET_USER_REQUEST" = "GET_USER_REQUEST";
+export const GET_USER_FAILED: "GET_USER_FAILED" = "GET_USER_FAILED";
+export const LOGIN_REQUEST: "LOGIN_REQUEST" = "LOGIN_REQUEST";
+export const LOGIN_FAILED: "LOGIN_FAILED" = "LOGIN_FAILED";
+export const LOGOUT_REQUEST: "LOGOUT_REQUEST" = "LOGOUT_REQUEST";
+export const LOGOUT_FAILED: "LOGOUT_FAILED" = "LOGOUT_FAILED";
 
 export const setAuthChecked = (value) => ({
   type: SET_AUTH_CHECKED,

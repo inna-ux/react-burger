@@ -1,11 +1,11 @@
 import { postOrderData } from "../../utils/api";
 
-export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST"; //тип экшена
-export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
-export const GET_ORDER_FAILED = "GET_ORDER_FAILED";
+export const GET_ORDER_REQUEST: "GET_ORDER_REQUEST" = "GET_ORDER_REQUEST"; //тип экшена
+export const GET_ORDER_SUCCESS: "GET_ORDER_SUCCESS" = "GET_ORDER_SUCCESS";
+export const GET_ORDER_FAILED: "GET_ORDER_FAILED" = "GET_ORDER_FAILED";
 
-export const ADD_ORDER_ITEMS = "ADD_ORDER_ITEMS";
-export const DELETE_ORDER_INFO = "DELETE_ORDER_INFO";
+export const ADD_ORDER_ITEMS: "ADD_ORDER_ITEMS" = "ADD_ORDER_ITEMS";
+export const DELETE_ORDER_INFO: "DELETE_ORDER_INFO" = "DELETE_ORDER_INFO";
 
 // Получение и обновление номера заказа в модальном окне OrderDetails.
 export const getOrderData = (orderData) => (dispatch) => {
