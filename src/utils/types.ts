@@ -12,3 +12,14 @@ export type TIngredient = {
   readonly _id: string;
   readonly id?: string;
 };
+export type TUserData = {
+  accessToken: string;
+  refreshToken: string;
+  success: boolean;
+  user: {
+    email: string;
+    name: string;
+    password?: string;
+  };
+};
+

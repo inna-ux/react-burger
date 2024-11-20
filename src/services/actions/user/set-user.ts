@@ -1,5 +1,7 @@
 import { login, getUser, logoutUser } from "../../../utils/api";
 import { setCookie, removeCookie } from "../../../utils/cooke";
+import { TUserData } from "../../../utils/types";
+
 export const SET_AUTH_CHECKED: "SET_AUTH_CHECKED" = "SET_AUTH_CHECKED";
 export const SET_USER: "SET_USER" = "SET_USER";
 export const GET_USER_REQUEST: "GET_USER_REQUEST" = "GET_USER_REQUEST";
@@ -9,17 +11,64 @@ export const LOGIN_FAILED: "LOGIN_FAILED" = "LOGIN_FAILED";
 export const LOGOUT_REQUEST: "LOGOUT_REQUEST" = "LOGOUT_REQUEST";
 export const LOGOUT_FAILED: "LOGOUT_FAILED" = "LOGOUT_FAILED";
 
-export const setAuthChecked = (value) => ({
+//типизация экшенов 
+export interface ILoginRequest {
+  readonly type: typeof LOGIN_REQUEST
+}
+
+export interface ILoginFailed{
+  readonly type: typeof LOGIN_FAILED
+}
+
+export interface ILogoutRequest {
+  readonly type: typeof LOGOUT_REQUEST
+}
+
+export interface ILogoutFailed {
+  readonly type: typeof LOGOUT_FAILED
+}
+
+export interface IGetUserRequest {
+  readonly type: typeof GET_USER_REQUEST
+}
+
+export interface IGetUserFailed {
+  readonly type: typeof GET_USER_FAILED
+}
+
+export interface ISetAuthChecked {
+  readonly type: typeof SET_AUTH_CHECKED;
+ payload: boolean
+}
+
+export interface ISetUser {
+  readonly type: typeof SET_USER;
+  payload: TUserData 
+}
+
+// Объединение типов
+export type TLoginActions = 
+  | ILoginRequest
+  | ILoginFailed
+  | ILogoutRequest
+  | ILogoutFailed
+  | IGetUserRequest
+  | IGetUserFailed
+  | ISetAuthChecked
+  | ISetUser;
+
+// типизация Генераторов экшенов
+export const setAuthChecked = (value: boolean): ISetAuthChecked => ({
   type: SET_AUTH_CHECKED,
   payload: value,
 });
 
-export const setUser = (user) => ({
+export const setUser = (user: TUserData): ISetUser => ({
   type: SET_USER,
   payload: user,
 });
-
-export const loginAction = (email, password) => (dispatch) => {
+//Типизация thunk-экшенов
+export const loginAction = (email: string, password: string) => (dispatch) => {
   dispatch({
     type: LOGIN_REQUEST,
   });

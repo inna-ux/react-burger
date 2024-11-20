@@ -1,11 +1,30 @@
 import { user } from "../../../utils/api";
 import { setCookie } from "../../../utils/cooke";
+import { TUserData } from "../../../utils/types";
 
 export const REGISTER_REQUEST: "REGISTER_REQUEST" = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS: "REGISTER_SUCCESS" = "REGISTER_SUCCESS";
 export const REGISTER_FAILED: "REGISTER_FAILED" = "REGISTER_FAILED";
 
-const userAction = (email, password, name) => (dispatch) => {
+//типизация экшенов
+export interface IUserRegisterRequest {
+  readonly type: typeof REGISTER_REQUEST;
+}
+
+export interface IUserRegisterFailed {
+  readonly type: typeof REGISTER_FAILED;
+}
+
+export interface IUserRegisterSuccess {
+  readonly type: typeof REGISTER_SUCCESS;
+  user: TUserData
+}
+
+// Объединение типов
+export type ICreateUser =  | IUserRegisterRequest | IUserRegisterFailed | IUserRegisterSuccess;
+
+//Типизация thunk-экшенов
+const userAction = (email: string, password: string, name: string) => (dispatch) => {
   dispatch({
     type: REGISTER_REQUEST,
   });

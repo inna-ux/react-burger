@@ -3,12 +3,44 @@ import { postOrderData } from "../../utils/api";
 export const GET_ORDER_REQUEST: "GET_ORDER_REQUEST" = "GET_ORDER_REQUEST"; //тип экшена
 export const GET_ORDER_SUCCESS: "GET_ORDER_SUCCESS" = "GET_ORDER_SUCCESS";
 export const GET_ORDER_FAILED: "GET_ORDER_FAILED" = "GET_ORDER_FAILED";
-
 export const ADD_ORDER_ITEMS: "ADD_ORDER_ITEMS" = "ADD_ORDER_ITEMS";
 export const DELETE_ORDER_INFO: "DELETE_ORDER_INFO" = "DELETE_ORDER_INFO";
 
+// Типизация экшенов
+export interface IGetOrderRequest {
+  readonly type: typeof GET_ORDER_REQUEST;
+}
+
+export interface IGetOrderSuccess {
+  readonly type: typeof GET_ORDER_SUCCESS;
+  readonly payload: number,
+}
+
+export interface IGetOrderFailed {
+  readonly type: typeof GET_ORDER_FAILED;
+}
+
+export interface IAddOrderItems {
+    readonly type: typeof ADD_ORDER_ITEMS;
+    readonly payload: string[],
+}
+
+export interface IDeleteOrderInfo {
+  readonly type: typeof DELETE_ORDER_INFO;
+}
+
+// Объединение типов
+export type TGetOrderActions = 
+  | IGetOrderRequest
+  | IGetOrderSuccess
+  | IGetOrderFailed
+  | IAddOrderItems
+  | IDeleteOrderInfo
+  ;
+
+//Типизация thunk-экшенов
 // Получение и обновление номера заказа в модальном окне OrderDetails.
-export const getOrderData = (orderData) => (dispatch) => {
+export const getOrderData = (orderData: Array<string>) => (dispatch) => {
   dispatch({
     type: GET_ORDER_REQUEST,
   });
@@ -30,4 +62,5 @@ export const getOrderData = (orderData) => (dispatch) => {
     });
 };
 
-export const addOrderitems = (payload) => ({ type: ADD_ORDER_ITEMS, payload });
+// типизация Генераторов экшенов
+export const addOrderitems = (payload: string[]): IAddOrderItems => ({ type: ADD_ORDER_ITEMS, payload });
