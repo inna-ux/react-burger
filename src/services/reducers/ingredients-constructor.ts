@@ -5,16 +5,17 @@ import {
   RESET_INGREDIENTS,
   ADD_BUNS,
 } from "../actions/ingredients-constructor.js";
-
+import { TListIngredientsConstructorState } from "../../utils/types.js";
+import { TIngrediensConstructorActions } from "../actions/ingredients-constructor.js";
 
 //список всех ингредиентов в текущем конструкторе бургера
-const initialState = {
+const initialState: TListIngredientsConstructorState = {
   // Исходное состояние
   buns: [],
   otherIngredients: [],
 };
 // Хранение списка ингредиентов для конструктора бургера. Используется в компоненте BurgerConstructor.
-export const listIngredientsConstructor = (state = initialState, action) => {
+export const listIngredientsConstructor = (state = initialState, action: TIngrediensConstructorActions) => {
   switch (action.type) {
     case ADD_BUNS:
       return { ...state, buns: action.payload };

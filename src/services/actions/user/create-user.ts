@@ -17,7 +17,7 @@ export interface IUserRegisterFailed {
 
 export interface IUserRegisterSuccess {
   readonly type: typeof REGISTER_SUCCESS;
-  user: TUserData
+  payload: TUserData
 }
 
 // Объединение типов

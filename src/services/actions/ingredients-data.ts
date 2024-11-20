@@ -20,6 +20,7 @@ export interface IGetIngredientsDataSuccess {
 
 export interface IGetIngredientsDataError {
   readonly type: typeof GET_INGREDIENTS_DATA_ERROR;
+  payload: string
 }
 
 

@@ -17,8 +17,10 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_REQUEST,
 } from "../../actions/user/update-user.js";
+import { TUserState, TUserAction } from "../../../utils/types.js";
 
-const initialState = {
+
+const initialState: TUserState = {
   user: null,
   isAuthChecked: false,
 
@@ -35,7 +37,7 @@ const initialState = {
   updateUserFailed: false,
 };
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action: TUserAction) => {
   switch (action.type) {
     case REGISTER_REQUEST: {
       return {

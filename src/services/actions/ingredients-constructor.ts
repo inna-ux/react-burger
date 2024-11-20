@@ -14,17 +14,16 @@ export interface IAddIngredient {
   
   export interface IDeleteIngredient {
     readonly type: typeof DELETE_INGREDIENT;
-    payload: string
+    item: TIngredient
   }
   
-  type IngredientOrder = {
-    dragIndex: number,
-    hoverIndex: number
-  };
+ 
   
   export interface IIngredientMove {
     readonly type: typeof MOVE_INGREDIENTS;
-    payload: IngredientOrder
+    item: TIngredient,
+    dragIndex: number,
+    hoverIndex: number
   }
   
   export interface IAddBuns {
@@ -32,7 +31,9 @@ export interface IAddIngredient {
     payload: Array<TIngredient>
   }
   
- 
+  export interface IResetIngredient {
+    readonly type: typeof RESET_INGREDIENTS;
+  }
   
   // Объединение типов
   export type TIngrediensConstructorActions = 
@@ -40,6 +41,7 @@ export interface IAddIngredient {
     | IDeleteIngredient
     | IIngredientMove
     | IAddBuns
+    | IResetIngredient
     ;
 
 // Хранение списка ингредиентов для конструктора бургера. Используется в компоненте BurgerConstructor.

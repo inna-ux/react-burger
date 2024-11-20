@@ -43,7 +43,7 @@ export interface ISetAuthChecked {
 
 export interface ISetUser {
   readonly type: typeof SET_USER;
-  payload: TUserData 
+  payload: TUserData | null 
 }
 
 // Объединение типов
@@ -63,7 +63,7 @@ export const setAuthChecked = (value: boolean): ISetAuthChecked => ({
   payload: value,
 });
 
-export const setUser = (user: TUserData): ISetUser => ({
+export const setUser = (user: TUserData | null ): ISetUser => ({
   type: SET_USER,
   payload: user,
 });

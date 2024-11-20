@@ -11,7 +11,7 @@ export interface IUpdateUserRequest {
 }
 export interface IUpdateUserSuccess {
   readonly type: typeof UPDATE_USER_SUCCESS;
-  user: TUserData
+  payload: TUserData
 }
 export interface IUpdateUserFailed {
   readonly type: typeof UPDATE_USER_FAILED;
