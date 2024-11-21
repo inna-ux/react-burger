@@ -1,4 +1,5 @@
 import { postOrderData } from "../../utils/api";
+import { AppDispatch, AppThunk } from "../../utils/types/index";
 
 export const GET_ORDER_REQUEST: "GET_ORDER_REQUEST" = "GET_ORDER_REQUEST"; //тип экшена
 export const GET_ORDER_SUCCESS: "GET_ORDER_SUCCESS" = "GET_ORDER_SUCCESS";
@@ -40,7 +41,7 @@ export type TGetOrderActions =
 
 //Типизация thunk-экшенов
 // Получение и обновление номера заказа в модальном окне OrderDetails.
-export const getOrderData = (orderData: Array<string>) => (dispatch) => {
+export const getOrderData: AppThunk = (orderData: Array<string>) => (dispatch: AppDispatch) => {
   dispatch({
     type: GET_ORDER_REQUEST,
   });

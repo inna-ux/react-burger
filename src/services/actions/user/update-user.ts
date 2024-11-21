@@ -1,6 +1,7 @@
 import { refreshToken, updateUser } from "../../../utils/api";
 import { setCookie } from "../../../utils/cooke";
-import { TUserData } from "../../../utils/types";
+import { TUserData } from "../../../utils/types/types";
+import { AppDispatch, AppThunk } from "../../../utils/types/index"
 
 export const UPDATE_USER_REQUEST: "UPDATE_USER_REQUEST" = "UPDATE_USER_REQUEST";
 export const UPDATE_USER_SUCCESS: "UPDATE_USER_SUCCESS" = "UPDATE_USER_SUCCESS";
@@ -20,7 +21,7 @@ export interface IUpdateUserFailed {
 export type TUpdateUserActions = | IUpdateUserRequest | IUpdateUserSuccess | IUpdateUserFailed;
 
 //Типизация thunk-экшенов
-const updateUserAction = (name: string, email: string, password: string) => (dispatch) => {
+const updateUserAction: AppThunk = (name: string, email: string, password: string) => (dispatch: AppDispatch) => {
   dispatch({
     type: UPDATE_USER_REQUEST,
   });

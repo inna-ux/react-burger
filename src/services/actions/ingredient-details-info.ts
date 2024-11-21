@@ -1,4 +1,5 @@
-import { TIngredient } from "../../utils/types";
+import { TIngredient } from "../../utils/types/types";
+
 
 // Добавление данных о просматриваемом в модальном окне IngredientDetails ингредиенте.
 // Удаление данных о просматриваемом в модальном окне ингредиенте при закрытии модального окна.

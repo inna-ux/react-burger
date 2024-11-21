@@ -3,10 +3,10 @@ import {
   DELETE_INGREDIENT,
   MOVE_INGREDIENTS,
   RESET_INGREDIENTS,
-  ADD_BUNS,
-} from "../actions/ingredients-constructor.js";
-import { TListIngredientsConstructorState } from "../../utils/types.js";
-import { TIngrediensConstructorActions } from "../actions/ingredients-constructor.js";
+  ADD_BUNS, TIngrediensConstructorActions
+} from "../actions/ingredients-constructor";
+import { TListIngredientsConstructorState } from "../../utils/types/types";
+
 
 //список всех ингредиентов в текущем конструкторе бургера
 const initialState: TListIngredientsConstructorState = {

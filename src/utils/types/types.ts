@@ -1,6 +1,6 @@
-import { ICreateUser } from "../services/actions/user/create-user";
-import { TLoginActions } from "../services/actions/user/set-user";
-import { TUpdateUserActions } from "../services/actions/user/update-user";
+import { ICreateUser } from "../../services/actions/user/create-user";
+import { TLoginActions } from "../../services/actions/user/set-user";
+import { TUpdateUserActions } from "../../services/actions/user/update-user";
 export type TIngredient = {
   readonly calories: number;
   readonly carbohydrates: number;

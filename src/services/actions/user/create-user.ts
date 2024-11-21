@@ -1,6 +1,7 @@
 import { user } from "../../../utils/api";
 import { setCookie } from "../../../utils/cooke";
-import { TUserData } from "../../../utils/types";
+import { AppDispatch, AppThunk } from "../../../utils/types/index";
+import { TUserData } from "../../../utils/types/types";
 
 export const REGISTER_REQUEST: "REGISTER_REQUEST" = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS: "REGISTER_SUCCESS" = "REGISTER_SUCCESS";
@@ -24,7 +25,7 @@ export interface IUserRegisterSuccess {
 export type ICreateUser =  | IUserRegisterRequest | IUserRegisterFailed | IUserRegisterSuccess;
 
 //Типизация thunk-экшенов
-const userAction = (email: string, password: string, name: string) => (dispatch) => {
+const userAction: AppThunk = (email: string, password: string, name: string) => (dispatch: AppDispatch) => {
   dispatch({
     type: REGISTER_REQUEST,
   });

@@ -1,5 +1,6 @@
 import { getIngredients } from "../../utils/api";
-import { TIngredient } from "../../utils/types";
+import { TIngredient } from "../../utils/types/types";
+import { AppDispatch, AppThunk } from "../../utils/types/index";
 
 // Получение списка ингредиентов от API. Используется в компоненте BurgerIngredients.
 
@@ -32,7 +33,7 @@ export type TIngredientsDataActions =
   ;
   
 //Типизация thunk-экшенов
-export const getIngredientsData = () => (dispatch) => {
+export const getIngredientsData: AppThunk = () => (dispatch: AppDispatch) => {
   dispatch({
     type: GET_INGREDIENTS_DATA_LOADING,
   });

@@ -2,9 +2,10 @@ import {
   GET_INGREDIENTS_DATA_SUCCESS,
   GET_INGREDIENTS_DATA_LOADING,
   GET_INGREDIENTS_DATA_ERROR,
-} from "../actions/ingredients-data.js";
-import { TIngredientsDataState } from "../../utils/types.js";
-import { TIngredientsDataActions } from "../actions/ingredients-data.js";
+  TIngredientsDataActions
+} from "../actions/ingredients-data";
+import { TIngredientsDataState } from "../../utils/types/types";
+
 // список всех полученных ингредиентов
 
 const initialState: TIngredientsDataState = {

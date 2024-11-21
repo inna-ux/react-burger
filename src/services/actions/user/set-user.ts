@@ -1,6 +1,7 @@
 import { login, getUser, logoutUser } from "../../../utils/api";
 import { setCookie, removeCookie } from "../../../utils/cooke";
-import { TUserData } from "../../../utils/types";
+import { TUserData } from "../../../utils/types/types";
+import { AppDispatch, AppThunk } from "../../../utils/types/index";
 
 export const SET_AUTH_CHECKED: "SET_AUTH_CHECKED" = "SET_AUTH_CHECKED";
 export const SET_USER: "SET_USER" = "SET_USER";
@@ -68,7 +69,7 @@ export const setUser = (user: TUserData | null ): ISetUser => ({
   payload: user,
 });
 //Типизация thunk-экшенов
-export const loginAction = (email: string, password: string) => (dispatch) => {
+export const loginAction: AppThunk = (email: string, password: string) => (dispatch: AppDispatch) => {
   dispatch({
     type: LOGIN_REQUEST,
   });
@@ -90,8 +91,8 @@ export const loginAction = (email: string, password: string) => (dispatch) => {
     });
 };
 
-export const checkUserAuth = () => {
-  return (dispatch) => {
+export const checkUserAuth: AppThunk = () => {
+  return (dispatch: AppDispatch) => {
     if (localStorage.getItem("refreshToken")) {
       getUser()
         .then((res) => dispatch(setUser(res.user)))
@@ -106,7 +107,7 @@ export const checkUserAuth = () => {
     }
   };
 };
-export const logoutUserAction = () => (dispatch) => {
+export const logoutUserAction: AppThunk = () => (dispatch: AppDispatch) => {
   dispatch({ type: LOGOUT_REQUEST });
   logoutUser()
     .then((res) => {

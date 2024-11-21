@@ -1,9 +1,6 @@
-import {
-  ADDING_DATA_INGREDIENTDETAILS,
-  DELETE_DATA_INGREDIENTDETAILS,
-} from "../actions/ingredient-details-info.js";
-import { TIngredientDetailsInfoState } from "../../utils/types.js";
-import { TDataIngredientDetailsActions } from "../actions/ingredient-details-info.js";
+import { TIngredientDetailsInfoState } from "../../utils/types/types";
+import { TDataIngredientDetailsActions,  ADDING_DATA_INGREDIENTDETAILS,
+  DELETE_DATA_INGREDIENTDETAILS, } from "../actions/ingredient-details-info";
 
 //объект текущего просматриваемого ингредиента
 const initialState: TIngredientDetailsInfoState = {

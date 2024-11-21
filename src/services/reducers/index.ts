@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import { ingredientsData } from "./ingredients-data.js";
-import { listIngredientsConstructor } from "./ingredients-constructor.js";
-import { ingredientDetailsInfo } from "./ingredient-details-info.js";
-import { orderNumber } from "./order-number.js";
-import { userReducer } from "./user/user-reducers.js";
+import { ingredientsData } from "./ingredients-data";
+import { listIngredientsConstructor } from "./ingredients-constructor";
+import { ingredientDetailsInfo } from "./ingredient-details-info";
+import { orderNumber } from "./order-number";
+import { userReducer } from "./user/user-reducers";
 
 // Корневой редьюсер
 export const rootReducer = combineReducers({

@@ -4,9 +4,10 @@ import {
   GET_ORDER_SUCCESS,
   ADD_ORDER_ITEMS,
   DELETE_ORDER_INFO,
-} from "../actions/order-number.js";
-import { TOrderNumber } from "../../utils/types.js";
-import { TGetOrderActions } from "../actions/order-number.js";
+  TGetOrderActions 
+} from "../actions/order-number";
+import { TOrderNumber } from "../../utils/types/types";
+
 
 //объект созданного заказа
 
