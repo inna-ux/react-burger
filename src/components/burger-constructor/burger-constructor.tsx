@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../utils/types/hook";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
@@ -24,24 +24,24 @@ import {
   addIngridient,
 } from "../../services/actions/ingredients-constructor";
 import { ContentBurger } from "./content-burger";
-import { TIngredient } from "../../utils/types";
+import { TIngredient } from "../../utils/types/types";
 
 function BurgerConstructor() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  // @ts-ignore
+ 
   const user = useSelector((state) => state.user.user);
 
   const saucesMains = useSelector(
-    // @ts-ignore
+    
     (store) => store.listIngredientsBurgerConstructor.otherIngredients
   );
   const buns = useSelector(
-    // @ts-ignore
+    
     (store) => store.listIngredientsBurgerConstructor.buns
   );
-  // @ts-ignore
+ 
   const { orderNumber } = useSelector((state) => state.createdOrder);
 
   const [{ isHover }, dropTarget] = useDrop({
@@ -85,11 +85,14 @@ function BurgerConstructor() {
     if (!user) {
       return navigate("/login");
     } else {
-      const orderArray = [buns._id]
-        .concat(saucesMains.map((item: TIngredient) => item._id))
-        .concat([buns._id]);
+      const orderArray =
+      //  [buns._id]
+      //   .concat(saucesMains.map((item: TIngredient) => item._id))
+      //   .concat([buns._id]);
+        buns.map((item: TIngredient) => item._id).concat(saucesMains.map((item: TIngredient) => item._id))
+        //const orderArray = [...saucesMains, ...buns].map(item => item._id);
       dispatch(addOrderitems(orderArray));
-      // @ts-ignore
+     
       dispatch(getOrderData(orderArray));
       setOpen(true);
     }

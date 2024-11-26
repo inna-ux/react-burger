@@ -2,7 +2,7 @@ import {
   REGISTER_REQUEST,
   REGISTER_FAILED,
   REGISTER_SUCCESS,
-} from "../../actions/user/create-user.js";
+} from "../../actions/user/create-user";
 
 import {
   SET_AUTH_CHECKED,
@@ -11,13 +11,13 @@ import {
   LOGIN_REQUEST,
   LOGOUT_FAILED,
   LOGOUT_REQUEST,
-} from "../../actions/user/set-user.js";
+} from "../../actions/user/set-user";
 import {
   UPDATE_USER_FAILED,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_REQUEST,
-} from "../../actions/user/update-user.js";
-import { TUserState, TUserAction } from "../../../utils/types.js";
+} from "../../actions/user/update-user";
+import { TUserState, TUserAction } from "../../../utils/types/types";
 
 
 const initialState: TUserState = {

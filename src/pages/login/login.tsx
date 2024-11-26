@@ -6,7 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../utils/types/hook";
 import { loginAction } from "../../services/actions/user/set-user";
 
 function Login() {
@@ -14,7 +14,7 @@ function Login() {
     email: "",
     password: "",
   });
-  // @ts-ignore
+ 
   const loginFailed = useSelector((state) => state.user.loginFailed);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ function Login() {
   };
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
+  
     dispatch(loginAction(signIn.email, signIn.password));
   };
   const registerClick = () => {

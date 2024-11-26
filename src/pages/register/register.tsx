@@ -7,7 +7,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useNavigate } from "react-router-dom";
 import styles from "./register.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/types/hook";
 import userAction from "../../services/actions/user/create-user";
 
 function Register() {
@@ -23,7 +23,6 @@ function Register() {
   };
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(userAction(userInfo.email, userInfo.password, userInfo.name));
   };
 

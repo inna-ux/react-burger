@@ -7,20 +7,23 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../utils/types/hook";
 import { logoutUserAction } from "../../services/actions/user/set-user";
 import updateUserAction from "../../services/actions/user/update-user";
+
+
 
 function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // @ts-ignore
+  
   const userInfo = useSelector((store) => store.user.user);
+  
 
   const [disabled, setDisabled] = useState(true);
   const [userInfoProfile, setUserInfoProfile] = useState({
-    name: userInfo.name,
-    email: userInfo.email,
+    name: userInfo?.name,
+    email: userInfo?.email,
     password: "",
   });
   const [activeButtons, setActiveButtons] = useState(false);
@@ -34,7 +37,7 @@ function Profile() {
     e.preventDefault();
 
     dispatch(
-      // @ts-ignore
+     
       updateUserAction(
         userInfoProfile.name,
         userInfoProfile.email,
@@ -45,29 +48,30 @@ function Profile() {
 
   const cancelChanges = () => {
     setUserInfoProfile({
-      email: userInfo.email,
+      email: userInfo?.email,
       password: "",
-      name: userInfo.name,
+      name: userInfo?.name,
     });
   };
 
   const logOut = () => {
-    // @ts-ignore
+  
     dispatch(logoutUserAction(() => navigate("/login")));
   };
 
   useEffect(() => {
     if (
-      (userInfoProfile.name === userInfo.name &&
-        userInfoProfile.email === userInfo.email &&
+      (userInfoProfile.name === userInfo?.name &&
+        userInfoProfile.email === userInfo?.email &&
         userInfoProfile.password === "") ||
       !userInfoProfile.name ||
       !userInfoProfile.email
     ) {
       setActiveButtons(false);
     }
-  }, [userInfo.email, userInfo.name, userInfoProfile]);
-
+  }, [userInfo?.email, userInfo?.name, userInfoProfile]);
+  
+ 
   return (
     <div className={styles.profilePage}>
       <section className={`${styles.links} mr-15`}>
@@ -107,7 +111,7 @@ function Profile() {
         <Input
           type={"text"}
           placeholder="Имя"
-          value={userInfoProfile.name}
+          value={userInfoProfile.name?? ''}
           name={"name"}
           onChange={onChange}
           icon="EditIcon"
@@ -119,7 +123,7 @@ function Profile() {
 
         <EmailInput
           placeholder="Логин"
-          value={userInfoProfile.email}
+          value={userInfoProfile.email?? ''}
           name={"email"}
           onChange={onChange}
           isIcon={true}

@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/types/hook";
 import AppHeader from "../app-header/app-header";
 import appStyles from "./app.module.css";
-import { getIngredientsData } from "../../services/actions/ingredients-data.js";
+import { getIngredientsData } from "../../services/actions/ingredients-data";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import HomePage from "../../pages/home/home";
 import IngredientsDetails from "../ingredient-details/ingredient-details";
@@ -13,7 +13,7 @@ import ForgotPassword from "../../pages/forgot-password/forgot-password";
 import ResetPassword from "../../pages/reset-password/reset-password";
 import Register from "../../pages/register/register";
 import { NotFound404 } from "../../pages/not-found/not-found";
-import { checkUserAuth } from "../../services/actions/user/set-user.js";
+import { checkUserAuth } from "../../services/actions/user/set-user";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import Profile from "../../pages/profile/profile";
 
@@ -30,12 +30,12 @@ function App() {
   const background = location.state && location.state.background;
 
   useEffect(() => {
-    // @ts-ignore
+    
     dispatch(checkUserAuth());
   }, [dispatch]);
 
   useEffect(() => {
-    // @ts-ignore
+  
     dispatch(getIngredientsData());
   }, [dispatch]);
 

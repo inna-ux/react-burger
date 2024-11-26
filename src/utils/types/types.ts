@@ -16,15 +16,13 @@ export type TIngredient = {
   readonly id?: string;
 };
 export type TUserData = {
-  accessToken: string;
-  refreshToken: string;
-  success: boolean;
-  user: {
+  
     email: string;
     name: string;
     password?: string;
-  };
+
 };
+
 
 export type TUserState = {
   user: TUserData | null,
@@ -65,3 +63,5 @@ export type TOrderNumber = {
   orderFailed: boolean,
   orderItems: string[] | [],
 }
+
+

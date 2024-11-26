@@ -1,15 +1,16 @@
 import { createSelector } from "reselect";
+import { TIngredient } from "../utils/types/types";
 
 export const getAllBuns = createSelector(
   [(state) => state.listIngredients.data],
-  (data) => data.filter((item) => item.type === "bun")
+  (data) => data.filter((item: TIngredient) => item.type === "bun")
 );
 
 export const getAllMain = createSelector(
   [(state) => state.listIngredients.data],
-  (data) => data.filter((item) => item.type === "main")
+  (data) => data.filter((item: TIngredient) => item.type === "main")
 );
 export const getAllSauce = createSelector(
   [(state) => state.listIngredients.data],
-  (data) => data.filter((item) => item.type === "sauce")
+  (data) => data.filter((item: TIngredient) => item.type === "sauce")
 );
