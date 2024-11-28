@@ -1,0 +1,28 @@
+.group_block {
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-inline-start: 0;
+}
+.li {
+    width:100%;
+    
+  }
+
+  .loader {
+    display: inline-block;
+    font-size: 25px;
+    clip-path: inset(0 1ch 0 0);
+    animation: step 1s steps(4) infinite;
+    position: absolute;
+    top: 40%;
+    left: 15%;
+    text-shadow: 0 0 16px rgb(51 51 255 / 25%), 0 0 8px rgb(51 51 255 / 25%), 0 4px 32px rgb(51 51 255 / 50%);
+  }
+  
+  @keyframes step {
+    to {
+      clip-path: inset(0 -1ch 0 0)
+    }
+  }

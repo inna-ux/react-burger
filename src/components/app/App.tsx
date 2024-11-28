@@ -16,6 +16,7 @@ import { NotFound404 } from "../../pages/not-found/not-found";
 import { checkUserAuth } from "../../services/actions/user/set-user";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import Profile from "../../pages/profile/profile";
+import Feed from "../../pages/feed/feed";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<HomePage />} />
+        <Route path="/feed" element={<Feed />}/>
         <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
         <Route
           path="/register"

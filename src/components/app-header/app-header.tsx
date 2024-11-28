@@ -47,7 +47,7 @@ function AppHeader() {
             </NavLink>
           </li>
         </ul>
-        <NavLink to="/" className={headerStyles.logo}>
+        <NavLink to="/feed" className={headerStyles.logo}>
           <Logo />
         </NavLink>
         <NavLink
