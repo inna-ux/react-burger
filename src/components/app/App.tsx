@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { useDispatch } from "../../utils/types/hook";
+import { useDispatch, useSelector } from "../../utils/types/hook";
 import AppHeader from "../app-header/app-header";
 import appStyles from "./app.module.css";
 import { getIngredientsData } from "../../services/actions/ingredients-data";
@@ -17,6 +17,8 @@ import { checkUserAuth } from "../../services/actions/user/set-user";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import Profile from "../../pages/profile/profile";
 import Feed from "../../pages/feed/feed";
+import OrderInfoDetails from "../order-info-details/order-info-details";
+import Order from "../../pages/order/order";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +31,7 @@ function App() {
   };
 
   const background = location.state && location.state.background;
+  const { orders } = useSelector(state => state.wsFeedOrders);
 
   useEffect(() => {
     
@@ -46,6 +49,7 @@ function App() {
       <Routes location={background || location}>
         <Route path="/" element={<HomePage />} />
         <Route path="/feed" element={<Feed />}/>
+        <Route path="/feed/:id" element={<Order data={orders} profile={false} />} />
         <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
         <Route
           path="/register"
@@ -71,6 +75,14 @@ function App() {
             element={
               <Modal title={"Детали ингредиента"} onClose={handleModalClose}>
                 <IngredientsDetails />
+              </Modal>
+            }
+          />
+           <Route
+            path="/feed/:id"
+            element={
+              <Modal title={""} onClose={handleModalClose}>
+                <OrderInfoDetails data={orders} modal={true}/>
               </Modal>
             }
           />

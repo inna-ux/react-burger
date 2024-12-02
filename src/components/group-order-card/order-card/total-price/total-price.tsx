@@ -4,7 +4,7 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import styles from './total-price.module.css';
 
 type TTotalPriceProps = {
-    totalPrice: number;
+    totalPrice: number | undefined;
   }
 
 const TotalPrice = ({ totalPrice }: TTotalPriceProps): React.JSX.Element => {
