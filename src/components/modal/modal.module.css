@@ -7,12 +7,13 @@
   text-align: center;
   background-color: #1c1c21;
   z-index: 456657768;
+  padding: 40px 40px 40px 40px;
 }
 
 .close__icon {
   position: absolute;
-  right: 40px;
-  top: 60px;
+  right: 0px;
+  top: 20px;
   cursor: pointer;
 }
 .title__container {

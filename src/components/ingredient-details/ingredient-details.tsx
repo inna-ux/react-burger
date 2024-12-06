@@ -19,7 +19,7 @@ function IngredientsDetails() {
           <p className="text text_type_main-medium mt-4 mb-8">
             {ingredient.name}
           </p>
-          <div className={`${style.ingredients__container} pb-15`}>
+          <div className={`${style.ingredients__container} pb-4`}>
             <div className={style.ingredients__info}>
               <p className="text text_type_main-default text_color_inactive">
                 Калории,ккал

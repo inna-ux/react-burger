@@ -54,7 +54,7 @@ const OrderInfoDetails = ({
       {!currentOrder ? (
         <Preloader />
       ) : (
-        <section className={`${style.section}  mt-15`}>
+        <section className={`${style.section} `}>
           {modal ? (
             <p className={`text text_type_digits-default mb-10`}>
               #{currentOrder.number}

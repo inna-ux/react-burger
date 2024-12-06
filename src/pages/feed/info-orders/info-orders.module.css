@@ -11,6 +11,7 @@
 .table_status {
   display: flex;
   gap: 36px;
+  justify-content: space-between;
 }
 .result {
   display: flex;
