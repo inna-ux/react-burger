@@ -31,15 +31,14 @@ function App() {
   };
 
   const background = location.state && location.state.background;
-  const { orders } = useSelector(state => state.wsFeedOrders);
+  const { orders } = useSelector((state) => state.wsFeedOrders);
+  const { authOrders } = useSelector((state) => state.authFeedOrders);
 
   useEffect(() => {
-    
     dispatch(checkUserAuth());
   }, [dispatch]);
 
   useEffect(() => {
-  
     dispatch(getIngredientsData());
   }, [dispatch]);
 
@@ -48,14 +47,23 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/feed" element={<Feed />}/>
-        <Route path="/feed/:id" element={<Order data={orders} profile={false} />} />
+        <Route path="/feed" element={<Feed path={"/feed"} />} />
+        <Route
+          path="/feed/:id"
+          element={<Order data={orders} profile={false} />}
+        />
         <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
         <Route
           path="/register"
           element={<OnlyUnAuth component={<Register />} />}
         />
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
+        <Route
+          path="/profile/orders/:id"
+          element={
+            <OnlyAuth component={<Order profile={true} data={authOrders} />} />
+          }
+        />
         <Route
           path="/forgot-password"
           element={<OnlyUnAuth component={<ForgotPassword />} />}
@@ -78,11 +86,19 @@ function App() {
               </Modal>
             }
           />
-           <Route
+          <Route
             path="/feed/:id"
             element={
               <Modal title={""} onClose={handleModalClose}>
-                <OrderInfoDetails data={orders} modal={true}/>
+                <OrderInfoDetails data={orders} modal={true} />
+              </Modal>
+            }
+          />
+          <Route
+            path="/profile/orders/:id"
+            element={
+              <Modal title={""} onClose={handleModalClose}>
+                <OrderInfoDetails data={authOrders} modal={true} />
               </Modal>
             }
           />

@@ -6,7 +6,10 @@ import {
   wsConnectionStart,
   wsConnectionClosed,
 } from "../../services/actions/websocket";
-// import { wsAuthConnectionStart, wsAuthConnectionClosed } from '../../services/actions/auth-websocket';
+import {
+  wsAuthConnectionStart,
+  wsAuthConnectionClosed,
+} from "../../services/actions/websocket-aurth";
 import { URL_WSS } from "../../utils/api";
 import { TOrderType } from "../../utils/types/types";
 import { Preloader } from "../../components/preloader/preloader";
