@@ -8,6 +8,9 @@ import { TDataIngredientDetailsActions } from '../../services/actions/ingredient
 import { ICreateUser } from '../../services/actions/user/create-user'; 
 import { TLoginActions } from '../../services/actions/user/set-user';
 import { TUpdateUserActions } from '../../services/actions/user/update-user';
+import { TCurrentOrderActions } from '../../services/actions/current-order';
+import { TWsActions } from '../../services/actions/websocket';
+import { TWsAuthActions } from '../../services/actions/websocket-aurth';
 
 
 //типизация хранилища - отдельный тип
@@ -22,7 +25,11 @@ type TApplicationActions =
 | TLoginActions
 | TUpdateUserActions
 |ICreateUser
-| TDataIngredientDetailsActions;
+| TDataIngredientDetailsActions
+| TCurrentOrderActions
+| TWsActions
+| TWsAuthActions
+;
 
 // Типизация thunk'ов в нашем приложении
 export type AppThunk<TReturn = void> = ActionCreator<
