@@ -6,19 +6,23 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile.module.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  NavLink,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { useSelector, useDispatch } from "../../utils/types/hook";
 import { logoutUserAction } from "../../services/actions/user/set-user";
 import updateUserAction from "../../services/actions/user/update-user";
-
-
+import ProfileOrdersPage from "./profile-orders-page/profile-orders-page";
 
 function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+  const location = useLocation();
   const userInfo = useSelector((store) => store.user.user);
-  
 
   const [disabled, setDisabled] = useState(true);
   const [userInfoProfile, setUserInfoProfile] = useState({
@@ -37,7 +41,6 @@ function Profile() {
     e.preventDefault();
 
     dispatch(
-     
       updateUserAction(
         userInfoProfile.name,
         userInfoProfile.email,
@@ -55,7 +58,6 @@ function Profile() {
   };
 
   const logOut = () => {
-  
     dispatch(logoutUserAction(() => navigate("/login")));
   };
 
@@ -70,11 +72,20 @@ function Profile() {
       setActiveButtons(false);
     }
   }, [userInfo?.email, userInfo?.name, userInfoProfile]);
-  
- 
+
+  const descriptionPage =
+    location.pathname === "/profile" ? (
+      <p className={`${styles.text} text text_type_main-default mt-8`}>
+        В этом разделе вы можете изменить свои персональные данные
+      </p>
+    ) : (
+      <p className={`${styles.text} text text_type_main-default mt-8`}>
+        В этом разделе вы можете просмотреть свою историю заказов
+      </p>
+    );
   return (
     <div className={styles.profilePage}>
-      <section className={`${styles.links} mr-15`}>
+      <section className={`${styles.links} mt-30 mb-20 mr-15`}>
         <NavLink
           end
           to="/profile"
@@ -103,15 +114,13 @@ function Profile() {
         >
           Выход
         </NavLink>
-        <p className={`${styles.text} text text_type_main-default mt-8`}>
-          В этом разделе вы можете изменить свои персональные данные.
-        </p>
+        {descriptionPage}
       </section>
       <form onSubmit={onSubmit} className={styles.form}>
         <Input
           type={"text"}
           placeholder="Имя"
-          value={userInfoProfile.name?? ''}
+          value={userInfoProfile.name ?? ""}
           name={"name"}
           onChange={onChange}
           icon="EditIcon"
@@ -123,7 +132,7 @@ function Profile() {
 
         <EmailInput
           placeholder="Логин"
-          value={userInfoProfile.email?? ''}
+          value={userInfoProfile.email ?? ""}
           name={"email"}
           onChange={onChange}
           isIcon={true}
@@ -151,6 +160,13 @@ function Profile() {
           </div>
         )}
       </form>
+
+      <Routes>
+        <Route
+          path="/orders"
+          element={<ProfileOrdersPage path={"/profile/orders"} />}
+        />
+      </Routes>
     </div>
   );
 }
