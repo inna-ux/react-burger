@@ -1,38 +1,40 @@
 import { getCookie } from "../../utils/cooke";
 import { Middleware } from "redux";
 
-
 interface IWebSocket {
   wsStart: string;
   onOpen: string;
   onError: string;
   onClose: string;
-  getOrders: string
+  getOrders: string;
 }
-const token = getCookie('accessToken'); 
-const accessToken = token?.split('Bearer ')[1];
-export const socketMiddleware = (wsActions: IWebSocket, auth: boolean): Middleware => {
 
-  return store => {
+export const socketMiddleware = (
+  wsActions: IWebSocket,
+  auth: boolean
+): Middleware => {
+  return (store) => {
     let socket: WebSocket | null = null;
 
-    return next => action => {
+    return (next) => (action) => {
       const { dispatch } = store;
       const { type, payload }: any = action;
       const { wsStart, onOpen, onClose, onError, getOrders } = wsActions;
 
       if (type === wsStart) {
-        socket = (!auth)
+        const token = getCookie("accessToken");
+        const accessToken = token?.split("Bearer ")[1];
+        socket = !auth
           ? new WebSocket(payload)
-          : new WebSocket(`${payload}?token=${accessToken}`)
+          : new WebSocket(`${payload}?token=${accessToken}`);
       }
 
       if (socket) {
-        socket.onopen = event => {
+        socket.onopen = (event) => {
           dispatch({ type: onOpen, payload: event });
         };
 
-        socket.onerror = event => {
+        socket.onerror = (event) => {
           dispatch({ type: onError, payload: event });
         };
 
@@ -50,4 +52,4 @@ export const socketMiddleware = (wsActions: IWebSocket, auth: boolean): Middlewa
       next(action);
     };
   };
-}; 
+};
