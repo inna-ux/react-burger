@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "../../utils/types/hook";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
@@ -8,10 +8,9 @@ import { Preloader } from "../../components/preloader/preloader";
 
 function HomePage() {
   const { loading, error, data } = useSelector(
-    // @ts-ignore
     (store) => store.listIngredients
   );
-  // @ts-ignore
+  
   const { orderRequest } = useSelector((store) => store.createdOrder);
 
   return (

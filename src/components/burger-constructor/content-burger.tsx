@@ -2,9 +2,9 @@ import { useDrag, useDrop } from "react-dnd";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useRef } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/types/hook";
 import { DELETE_INGREDIENT } from "../../services/actions/ingredients-constructor";
-import { TIngredient } from "../../utils/types";
+import { TIngredient } from "../../utils/types/types";
 
 type TContentBurgerProps = {
   item: TIngredient;

@@ -2,11 +2,13 @@ import {
   GET_INGREDIENTS_DATA_SUCCESS,
   GET_INGREDIENTS_DATA_LOADING,
   GET_INGREDIENTS_DATA_ERROR,
-} from "../actions/ingredients-data.js";
+  TIngredientsDataActions
+} from "../actions/ingredients-data";
+import { TIngredientsDataState } from "../../utils/types/types";
 
 // список всех полученных ингредиентов
 
-const initialState = {
+const initialState: TIngredientsDataState = {
   // Исходное состояние
   data: [],
   loading: false,
@@ -14,7 +16,7 @@ const initialState = {
 };
 //Получение списка ингредиентов от API. Используется в компоненте BurgerIngredients.
 
-export const ingredientsData = (state = initialState, action) => {
+export const ingredientsData = (state = initialState, action: TIngredientsDataActions) => {
   switch (action.type) {
     case GET_INGREDIENTS_DATA_LOADING: {
       return {

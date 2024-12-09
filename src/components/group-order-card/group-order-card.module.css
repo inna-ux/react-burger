@@ -1,0 +1,16 @@
+.group_block {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  
+}
+.li {
+  width: 100%;
+  text-decoration: none;
+  color: #f2f2f3;
+  padding: 0;
+  cursor: pointer;
+  margin-bottom: 16px;
+  
+}

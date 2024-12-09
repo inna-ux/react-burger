@@ -5,11 +5,10 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import itemStyles from "./ingredient-item.module.css";
 import { openIngredientInfo } from "../../../services/actions/ingredient-details-info";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../../utils/types/hook";
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from "react-router-dom";
-import { TIngredient } from "../../../utils/types";
+import { TIngredient } from "../../../utils/types/types";
 
 type TBurgerIngredientItemProps = {
   ingredientData: TIngredient;
@@ -22,11 +21,11 @@ function BurgerIngredientItem({
   const location = useLocation();
 
   const constructorIngredients = useSelector(
-    // @ts-ignore
+ 
     (store) => store.listIngredientsBurgerConstructor.otherIngredients
   );
   const constructorBuns = useSelector(
-    // @ts-ignore
+
     (store) => store.listIngredientsBurgerConstructor.buns
   );
   const allIngredientsConstructor = [
