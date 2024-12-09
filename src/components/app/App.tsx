@@ -19,6 +19,8 @@ import Profile from "../../pages/profile/profile";
 import Feed from "../../pages/feed/feed";
 import OrderInfoDetails from "../order-info-details/order-info-details";
 import Order from "../../pages/order/order";
+import ProfileOrdersPage from "../../pages/profile/profile-orders-page/profile-orders-page";
+import ProfileForm from "../../pages/profile/profile-form/profile-form";
 
 function App() {
   const dispatch = useDispatch();
@@ -57,7 +59,16 @@ function App() {
           path="/register"
           element={<OnlyUnAuth component={<Register />} />}
         />
-        <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
+        <Route path="/profile" element={<OnlyAuth component={<Profile />} />} >
+        <Route
+          path="orders"
+          element={<ProfileOrdersPage path={"/profile/orders"} />}
+        />
+         <Route
+          path=""
+          element={<ProfileForm/>}
+        />
+        </Route>
         <Route
           path="/profile/orders/:id"
           element={

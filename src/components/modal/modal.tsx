@@ -36,12 +36,13 @@ export const Modal = ({
     <div>
       <ModalOverlay onClick={onClose} />
       <section className={style.modal}>
-        <div className={`${style.title__container} mt-10 ml-10 mr-10`}>
+        <div className={`${style.title__container}`}>
           <p className="text text_type_main-large">{title}</p>
-        </div>
-        <div className={style.close__icon}>
+          <div className={style.close__icon}>
           <CloseIcon type="primary" onClick={onClose} />
+          </div>
         </div>
+        
         {children}
       </section>
     </div>,

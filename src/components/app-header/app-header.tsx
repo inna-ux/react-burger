@@ -32,7 +32,7 @@ function AppHeader() {
           </li>
           <li className={`${headerStyles.nav_item}`}>
             <NavLink
-              to="*"
+              to="/feed"
               style={({ isActive }) => {
                 return {
                   color: isActive ? "white" : "#8585ad",
@@ -41,13 +41,13 @@ function AppHeader() {
               className={`${headerStyles.nav__link} pl-5 pr-5 pb-4 pt-4 ml-2 text text_type_main-default text_color_inactive`}
             >
               <ListIcon
-                type={location.pathname === "/*" ? "primary" : "secondary"}
+                type={location.pathname === "/feed" ? "primary" : "secondary"}
               />
               Лента заказов
             </NavLink>
           </li>
         </ul>
-        <NavLink to="/feed" className={headerStyles.logo}>
+        <NavLink to="/" className={headerStyles.logo}>
           <Logo />
         </NavLink>
         <NavLink

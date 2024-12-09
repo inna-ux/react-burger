@@ -10,12 +10,12 @@
   padding: 40px 40px 40px 40px;
 }
 
-.close__icon {
+/* .close__icon {
   position: absolute;
-  right: 0px;
+  right: 40px;
   top: 20px;
   cursor: pointer;
-}
+} */
 .title__container {
   display: flex;
   justify-content: space-between;

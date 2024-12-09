@@ -24,14 +24,14 @@
   margin: 0;
   width: 100%;
 }
-.item__ingredien {
+.item__ingredient {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   list-style: none;
   padding: 0;
-  margin: 0;
+  
 }
 .block__name__img {
   display: flex;
@@ -62,6 +62,9 @@
   display: flex;
   align-items: center;
   justify-self: flex-end;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .block__total__date {
   display: flex;

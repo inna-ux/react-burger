@@ -9,7 +9,7 @@ type TOrdersFeed = {
 
 function GroupOrderCard({ ordersData, path }: TOrdersFeed): React.JSX.Element {
   return (
-    <ul className={`${styles.group_block}  mb-4`}>
+    <ul className={`${styles.group_block}`}>
       {ordersData.map((item) => (
         <li className={styles.li} key={item._id}>
           <OrderCard ordersDataItem={item} path={path} profileStatus={false} />

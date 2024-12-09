@@ -42,7 +42,8 @@ const OrderCard = ({
   function handleClick() {
     dispatch(addCurrentOrderInfo(ordersDataItem));
   }
-
+ const CorruptedOrderCard = listOrderedIngredients.find((el) => el === null || el === undefined );
+   
   const statusOrder =
     ordersDataItem.status === "created" ? (
       <p className={`text text_type_main-default mt-2`}>Создан</p>
@@ -55,7 +56,10 @@ const OrderCard = ({
     ) : null;
 
   return (
-    <Link
+    <>
+   { !CorruptedOrderCard &&
+  
+   ( <Link
       to={`${path}/${ordersDataItem._id}`}
       state={{ background: location }}
       className={`${styles.orderCard}`}
@@ -79,9 +83,12 @@ const OrderCard = ({
       {profileStatus ? statusOrder : null}
 
       <div className={`${styles.info} mb-6`}>
-        <div className={`${styles.ingredients}`}>
+        
           <ul className={`${styles.icon__ingredients}`}>
             {listOrderedIngredients.slice(0, 6).map((item, index) => {
+              // if (item === undefined || item === null) {
+              //   return null
+              // }  else
               return (
                 <li
                   key={index}
@@ -104,12 +111,17 @@ const OrderCard = ({
               </div>
             ) : null}
           </ul>
-        </div>
+        
         <div className={`${styles.total}`}>
           <TotalPrice totalPrice={totalPrice} />
         </div>
       </div>
-    </Link>
+    </Link>)} 
+    {CorruptedOrderCard && null}
+    
+    </> 
+    
+    
   );
 };
 

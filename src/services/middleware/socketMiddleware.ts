@@ -1,6 +1,7 @@
 import { getCookie } from "../../utils/cooke";
 import { Middleware } from "redux";
 
+
 interface IWebSocket {
   wsStart: string;
   onOpen: string;
@@ -8,7 +9,8 @@ interface IWebSocket {
   onClose: string;
   getOrders: string
 }
-
+const token = getCookie('accessToken'); 
+const accessToken = token?.split('Bearer ')[1];
 export const socketMiddleware = (wsActions: IWebSocket, auth: boolean): Middleware => {
 
   return store => {
@@ -16,13 +18,13 @@ export const socketMiddleware = (wsActions: IWebSocket, auth: boolean): Middlewa
 
     return next => action => {
       const { dispatch } = store;
-      const { type, payload } = action;
+      const { type, payload }: any = action;
       const { wsStart, onOpen, onClose, onError, getOrders } = wsActions;
 
       if (type === wsStart) {
         socket = (!auth)
           ? new WebSocket(payload)
-          : new WebSocket(`${payload}?token=${getCookie("accessToken")}`)
+          : new WebSocket(`${payload}?token=${accessToken}`)
       }
 
       if (socket) {

@@ -9,6 +9,7 @@ import {
 import { URL_WSS } from "../../../utils/api";
 import { Preloader } from "../../../components/preloader/preloader";
 import { Link } from "react-router-dom";
+import { checkUserAuth } from "../../../services/actions/user/set-user";
 
 interface IProfileOrdersPageProps {
   path: string;
@@ -21,6 +22,10 @@ const ProfileOrdersPage = ({
   const { authOrders } = useSelector((state) => state.authFeedOrders);
 
   useEffect(() => {
+    dispatch(checkUserAuth());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(wsAuthConnectionStart(`${URL_WSS}/orders`));
     return () => {
       dispatch(wsAuthConnectionClosed());
@@ -28,14 +33,15 @@ const ProfileOrdersPage = ({
   }, [dispatch]);
 
   return (
-    <div className={`${styles.orders__block} mr-2`}>
-      <ul className={`${styles.group_list_orders_block}  mb-4`}>
+    <div className={`${styles.orders__block} `}>
+      <ul className={`${styles.group_list_orders_block} `}>
         {authOrders?.map((item) => (
           <li className={styles.li} key={item._id}>
-            <OrderCard ordersDataItem={item} path={path} profileStatus={true} />
+            <OrderCard ordersDataItem={item} key={item._id} path={path} profileStatus={true} />
           </li>
-        ))}
-        {!authOrders && <Preloader />}
+        )).reverse()}
+      </ul>
+       {!authOrders && <Preloader />}
         {authOrders?.length === 0 && (
           <div>
             <h1>У вас нет заказов</h1>
@@ -44,7 +50,6 @@ const ProfileOrdersPage = ({
             </Link>
           </div>
         )}
-      </ul>
     </div>
   );
 };

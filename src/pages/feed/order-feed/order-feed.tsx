@@ -12,7 +12,7 @@ function OrderFeed({ path }: TPropsFeed): React.JSX.Element {
       <h1 className={`${styles.title} text text_type_main-large mt-10 mb-5`}>
         Лента заказов
       </h1>
-      <div className={`${styles.ingredients__block} mr-2`}>
+      <div className={`${styles.ingredients__block}`}>
         <GroupOrderCard path={path} ordersData={ordersData} />
       </div>
       {!ordersData.length && <Preloader />}

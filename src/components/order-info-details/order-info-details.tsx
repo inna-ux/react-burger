@@ -78,7 +78,7 @@ const OrderInfoDetails = ({
           <ul className={`${style.list__ingredients}`}>
             {uniqueIngradients.map((item, index) =>
               item === undefined ? null : (
-                <li key={index} className={`${style.item__ingredient} mb4`}>
+                <li key={index} className={`${style.item__ingredient} mb-4`}>
                   <div className={`${style.block__name__img}`}>
                     <div className={`${style.frame}`}>
                       <img
@@ -93,7 +93,7 @@ const OrderInfoDetails = ({
                     </p>
                   </div>
 
-                  <div className={`${style.block__count__price} mr-6`}>
+                  <div className={`${style.block__count__price} `}>
                     <p className="text text_type_digits-default mr-2">
                       {
                         listOrderedIngredients?.filter((el) =>
