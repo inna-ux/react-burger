@@ -1,5 +1,6 @@
 import { getCookie, setCookie } from "./cooke";
 const Ingredient = "https://norma.nomoreparties.space/api";
+export const URL_WSS: string = 'wss://norma.nomoreparties.space'
 
 export function getIngredients() {
   return fetch(`${Ingredient}/ingredients`).then((res) => checkResponse(res));

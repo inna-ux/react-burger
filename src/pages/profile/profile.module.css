@@ -1,16 +1,19 @@
 .profilePage {
-  display: flex;
-  margin: 180px auto auto;
-  max-width: 1240px;
-}
 
+    display: flex;
+    max-width: 1240px;
+    margin: 0 auto;
+    min-height: 50px;
+    justify-content: start;
+    align-items: flex-start;
+}
 .links {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   color: #8585ad;
   padding: 0;
-  width: 320px;
+  width: 26%;
   height: fit-content;
 }
 
@@ -20,6 +23,7 @@
   text-decoration: none;
   color: #8585ad;
   height: 64px;
+  cursor: pointer;
 }
 
 .active {
@@ -32,9 +36,3 @@
   opacity: 0.4;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 24px;
-}

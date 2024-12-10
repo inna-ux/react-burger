@@ -1,7 +1,7 @@
 import React from "react";
 import groupStyles from "./ingredients-group.module.css";
 import BurgerIngredientItem from "../ingredient-item/ingredient-item";
-import { TIngredient } from "../../../utils/types";
+import { TIngredient } from "../../../utils/types/types";
 
 type TIngredientBoxProps = {
   data: TIngredient[];

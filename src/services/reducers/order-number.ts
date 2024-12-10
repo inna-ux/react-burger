@@ -4,11 +4,14 @@ import {
   GET_ORDER_SUCCESS,
   ADD_ORDER_ITEMS,
   DELETE_ORDER_INFO,
-} from "../actions/order-number.js";
+  TGetOrderActions 
+} from "../actions/order-number";
+import { TOrderNumber } from "../../utils/types/types";
+
 
 //объект созданного заказа
 
-const initialState = {
+const initialState: TOrderNumber = {
   // Исходное состояние
   orderNumber: 0,
   orderRequest: false,
@@ -18,7 +21,7 @@ const initialState = {
 
 // Получение и обновление номера заказа в модальном окне OrderDetails.
 
-export const orderNumber = (state = initialState, action) => {
+export const orderNumber = (state = initialState, action: TGetOrderActions) => {
   switch (action.type) {
     case GET_ORDER_REQUEST: {
       return {
