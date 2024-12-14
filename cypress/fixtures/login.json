@@ -1,0 +1,9 @@
+{
+    "success": true,
+    "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjdhZDZjYjI3YjA2MDAxYzNlNjJmOSIsImlhdCI6MTczNDE0MTY2NywiZXhwIjoxNzM0MTQyODY3fQ.muy61h7qcczf6fVAL9aYZUY7RVvyb8VQKctt5W78LOE",
+    "refreshToken": "67b9f59c0356e5384f51f179925158325d5f0b090628ee299dca324dadfafb4950b8f36398e87c70",
+    "user": {
+        "email": "blinovainna464@gmail.com",
+        "name": "Инна"
+    }
+}
