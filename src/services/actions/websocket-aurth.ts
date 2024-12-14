@@ -1,7 +1,7 @@
 
 import { TOrderType } from '../../utils/types/types';
 
-interface IWsGetOrder {
+export interface IWsGetOrder {
   orders: Array<TOrderType>
   success: boolean;
 }

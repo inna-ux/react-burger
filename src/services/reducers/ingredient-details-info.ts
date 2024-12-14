@@ -3,7 +3,7 @@ import { TDataIngredientDetailsActions,  ADDING_DATA_INGREDIENTDETAILS,
   DELETE_DATA_INGREDIENTDETAILS, } from "../actions/ingredient-details-info";
 
 //объект текущего просматриваемого ингредиента
-const initialState: TIngredientDetailsInfoState = {
+ export const initialState: TIngredientDetailsInfoState = {
   // Исходное состояние
   item: null,
 };

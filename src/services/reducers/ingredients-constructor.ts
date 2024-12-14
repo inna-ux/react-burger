@@ -9,7 +9,7 @@ import { TListIngredientsConstructorState } from "../../utils/types/types";
 
 
 //список всех ингредиентов в текущем конструкторе бургера
-const initialState: TListIngredientsConstructorState = {
+export const initialState: TListIngredientsConstructorState = {
   // Исходное состояние
   buns: [],
   otherIngredients: [],

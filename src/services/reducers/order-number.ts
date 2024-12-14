@@ -11,7 +11,7 @@ import { TOrderNumber } from "../../utils/types/types";
 
 //объект созданного заказа
 
-const initialState: TOrderNumber = {
+export const initialState: TOrderNumber = {
   // Исходное состояние
   orderNumber: 0,
   orderRequest: false,
