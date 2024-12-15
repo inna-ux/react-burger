@@ -47,10 +47,10 @@ Cypress.Commands.add("prepare", () => {
   );
   cy.setCookie("accessToken", "test-accessToken");
 
-  cy.visit("http://localhost:3000");
+  cy.visit('');
 });
 
 Cypress.Commands.add("make", () => {
   cy.intercept("GET", "api/ingredients", { fixture: "ingredients.json" });
-  cy.visit("http://localhost:3000");
+  cy.visit("");
 });
