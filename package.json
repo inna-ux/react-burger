@@ -34,7 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress:open": "./node_modules/.bin/cypress open",
-    "deploy-script": "npm run build && scp -r ./build/* burger@51.250.75.96:/home/burger/stellar-frontend"
+    "deploy-script": "npm run build && scp -r ./build/* burger@51.250.75.96:/var/www/burger.students.nomorepartiesco.ru/html"
   },
   "eslintConfig": {
     "extends": [

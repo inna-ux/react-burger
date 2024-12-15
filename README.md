@@ -26,4 +26,4 @@ _____
 2  Юнит-тесты написаны с использованием jest
 
 ## Адрес:
-https://stellarburger.ru
+https://burger.students.nomorepartiesco.ru
