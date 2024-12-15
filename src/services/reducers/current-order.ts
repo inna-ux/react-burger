@@ -1,12 +1,18 @@
-import { ADD_CURRENT_ORDER_INFO, DELETE_CURRENT_ORDER_INFO,  TCurrentOrderActions } from '../actions/current-order' ;
+import {
+  ADD_CURRENT_ORDER_INFO,
+  DELETE_CURRENT_ORDER_INFO,
+  TCurrentOrderActions,
+} from "../actions/current-order";
 import { TCurrentOrderState } from "../../utils/types/types";
 
+export const initialState: TCurrentOrderState = {
+  item: null,
+};
 
-const initialState: TCurrentOrderState = {
-  item: null
-}
-
-export const currentOrderReducer = (state = initialState, action: TCurrentOrderActions) => {
+export const currentOrderReducer = (
+  state = initialState,
+  action: TCurrentOrderActions
+) => {
   switch (action.type) {
     case ADD_CURRENT_ORDER_INFO: {
       return { item: action.payload };

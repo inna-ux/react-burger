@@ -10,6 +10,7 @@ function OrderDetails() {
     <>
       <p
         className={`${style.order__number} text text_type_digits-large  mb-8 ml-15 mr-15`}
+        data-cy='order-number'
       >
         {orderNumber}
       </p>

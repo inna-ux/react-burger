@@ -109,11 +109,11 @@ function BurgerConstructor() {
   }, [buns, saucesMains]);
 
   return (
-    <section ref={dropTarget} className={`${style.section} pt-25 pl-10 pb-10 `}>
-      <ul className={`${style.list_main}  pl-4 pr-4  `}>
-        <li className={`${style.item__top} ml-8 pr-4 mb-4`}>
+    <section ref={dropTarget} data-cy="container"  className={`${style.section} pt-25 pl-10 pb-10 `}>
+      <ul  className={`${style.list_main}  pl-4 pr-4  `}>
+        <li  className={`${style.item__top} ml-8 pr-4 mb-4`}>
           {buns.length === 0 ? (
-            <div
+            <div 
               style={{ borderColor }}
               className={`${style.block}  ${style.bunTop} `}
             >
@@ -132,20 +132,20 @@ function BurgerConstructor() {
           )}
         </li>
 
-        <div className={`${style.container__item__filling} pr-2`}>
+        <div  className={`${style.container__item__filling} pr-2`}>
           {saucesMains.length === 0 ? (
-            <div
+            <div 
               style={{ borderColor }}
               className={`${style.block} ${style.saucesMains}  `}
             >
-              <span className={`${style.title} text text_type_main-default `}>
+              <span  className={`${style.title} text text_type_main-default `}>
                 Выберите начинку
               </span>
             </div>
           ) : (
-            <ul className={style.list}>
+            <ul  className={style.list}>
               {saucesMains.map((item: TIngredient, index: number) => (
-                <li key={item.id} className={style.card__list_item}>
+                <li key={item.id}  className={style.card__list_item}>
                   <DragIcon type="primary" />
                   <ContentBurger
                     item={item}
@@ -158,18 +158,19 @@ function BurgerConstructor() {
           )}
         </div>
 
-        <li className={`${style.item__bottom} ml-8 pr-4 mt-4`}>
+        <li  className={`${style.item__bottom} ml-8 pr-4 mt-4`}>
           {buns.length === 0 ? (
-            <div
+            <div 
               style={{ borderColor }}
               className={`${style.block} ${style.bunBottom} `}
             >
-              <span className={`${style.title} text text_type_main-default `}>
+              <span  className={`${style.title} text text_type_main-default `}>
                 Выберите булки
               </span>
             </div>
           ) : (
             <ConstructorElement
+            
               type="bottom"
               isLocked={true}
               text={`${buns[0].name} (низ)`}
@@ -179,7 +180,7 @@ function BurgerConstructor() {
           )}
         </li>
       </ul>
-      <div className={`${style.full_price_container} mt-10`}>
+      <div data-cy="button" className={`${style.full_price_container}  mt-10` }>
         <div className={`${style.full_price} mr-10`}>
           <p className="text text_type_digits-medium mr-3">{totalCost}</p>
           <CurrencyIcon type="primary" />

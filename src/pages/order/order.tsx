@@ -34,7 +34,7 @@ const Order = ({ data, profile }: IOrder): React.JSX.Element => {
         dispatch(wsConnectionClosed());
       };
     }
-  }, [dispatch]);
+  }, [dispatch, profile]);
 
   return (
     <section className={`${style.full_page}`}>

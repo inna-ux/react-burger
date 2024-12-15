@@ -9,7 +9,7 @@ import {
   
   
   
-  const initialState: TWsAuthState = {
+  export const initialState: TWsAuthState = {
     wsAuthConnected: false,
     wsAuthError: '',
     authOrders: null,

@@ -35,10 +35,10 @@ export const Modal = ({
   return createPortal(
     <div>
       <ModalOverlay onClick={onClose} />
-      <section className={style.modal}>
+      <section data-cy="modal" className={style.modal}>
         <div className={`${style.title__container}`}>
           <p className="text text_type_main-large">{title}</p>
-          <div className={style.close__icon}>
+          <div data-cy="svg" className={style.close__icon}>
           <CloseIcon type="primary" onClick={onClose} />
           </div>
         </div>
