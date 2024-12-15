@@ -26,4 +26,4 @@ _____
 2  Юнит-тесты написаны с использованием jest
 
 ## Адрес:
-https://burger.students.nomorepartiesco.ru
+https://inna-ux.github.io/react-burger

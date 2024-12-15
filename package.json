@@ -33,8 +33,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress:open": "./node_modules/.bin/cypress open",
-    "deploy-script": "npm run build && scp -r ./build/* burger@51.250.75.96:/var/www/burger.students.nomorepartiesco.ru/html"
+    "cypress:open": "./node_modules/.bin/cypress open"
+    
   },
   "eslintConfig": {
     "extends": [
