@@ -20,7 +20,7 @@ import {
 import { TUserState, TUserAction } from "../../../utils/types/types";
 
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   user: null,
   isAuthChecked: false,
 

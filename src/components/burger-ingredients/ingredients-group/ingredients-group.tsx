@@ -20,7 +20,7 @@ function BurgerIngredientsGroup(props: TIngredientBoxProps): React.JSX.Element {
       >
         {props.title}
       </h2>
-      <ul className={`${groupStyles.group_block} ml-4 mt-6 mb-2`}>
+      <ul data-cy="ingredient" className={`${groupStyles.group_block} ml-4 mt-6 mb-2`}>
         {props.data.map((ingredient, index) => (
           <li className={groupStyles.li} key={index.toString()}>
             <BurgerIngredientItem ingredientData={ingredient} />

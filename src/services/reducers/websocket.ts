@@ -5,7 +5,7 @@ import {WS_CONNECTION_SUCCESS,
 import { TWsState } from '../../utils/types/types';   
 
 
-  const initialState: TWsState = {
+  export const initialState: TWsState = {
     wsConnected: false,
     wsError: '',
     orders: [],

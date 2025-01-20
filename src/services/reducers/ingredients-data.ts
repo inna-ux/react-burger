@@ -8,7 +8,7 @@ import { TIngredientsDataState } from "../../utils/types/types";
 
 // список всех полученных ингредиентов
 
-const initialState: TIngredientsDataState = {
+export const initialState: TIngredientsDataState = {
   // Исходное состояние
   data: [],
   loading: false,

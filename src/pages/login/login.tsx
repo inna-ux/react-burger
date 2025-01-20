@@ -44,6 +44,7 @@ function Login() {
           value={signIn.email}
           name={"email"}
           isIcon={false}
+          data-cy="email_input"
         />
         <PasswordInput
           placeholder="Пароль"
@@ -51,6 +52,7 @@ function Login() {
           value={signIn.password}
           name={"password"}
           extraClass="mb-2 mt-6 mb-6"
+          data-cy="password_input"
         />
         {loginFailed && (
           <p className={`${styles.error} text text_type_main-default mb-2`}>

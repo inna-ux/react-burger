@@ -51,6 +51,7 @@ function Register() {
           value={userInfo.email}
           name={"email"}
           extraClass="mb-2"
+          data-cy="email_input"
         />
         <PasswordInput
           placeholder="Пароль"
@@ -58,6 +59,7 @@ function Register() {
           value={userInfo.password}
           name={"password"}
           extraClass="mb-2"
+          data-cy="password_input"
         />
         <Button htmlType="submit" type="primary" size="medium">
           Зарегистрироваться

@@ -54,14 +54,14 @@ function BurgerIngredientItem({
   return (
     <>
       {!isDrag && (
-        <Link
+        <Link 
           to={`/ingredients/${ingredientData._id}`}
           state={{ background: location }}
           ref={dragRef}
           onClick={handler}
           className={`${itemStyles.card__item} pb-8`}
         >
-          {count === 0 ? null : <Counter count={count} size="default" />}
+          {count === 0 ? null : <Counter data-cy="counter" count={count} size="default" />}
 
           <img src={ingredientData.image} alt="the ingredient" />
 
